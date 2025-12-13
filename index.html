@@ -3,35 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VOXO Estúdio - Criação de Landing Pages de alta conversão e sites estratégicos para quem empreende com propósito.">
-    <meta name="author" content="Elizabeth - VOXO Estúdio">
-    <meta name="theme-color" content="#6C13E2"> <title>VOXO Estúdio | Web Design Estratégico</title>
-
-    <link rel="icon" type="image/png" href="https://voxoestudio.com.br/wp-content/uploads/2025/12/favicon-placeholder.png">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://voxoestudio.com.br/">
-    <meta property="og:title" content="VOXO Estúdio | Web Design Estratégico">
-    <meta property="og:description" content="Transforme visitantes em clientes com Landing Pages de alta conversão. Design exclusivo e estratégico.">
-    <meta property="og:image" content="https://voxoestudio.com.br/wp-content/uploads/2025/12/social-share-image.jpg"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="description" content="VOXO Estúdio - Sites profissionais que geram resultados. Web Design Estratégico.">
+    <title>VOXO Estúdio | Web Design Estratégico</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* --- 1. CONFIGURAÇÕES GERAIS --- */
+        /* --- 1. CONFIGURAÇÕES GERAIS E VARIÁVEIS --- */
         :root {
-            --bg-color: #050505;          
-            --card-bg: rgba(255, 255, 255, 0.03); 
+            --bg-color: #030305;          
+            --card-bg: rgba(20, 20, 25, 0.6); /* Vidro mais escuro premium */
             --border-color: rgba(255, 255, 255, 0.08);
             
-            --primary: #6C13E2;           
+            --primary: #7F2AFF; /* Roxo Elétrico */
             --accent: #C092FF;            
             --text-main: #FFFFFF;
             --text-muted: #9CA3AF;        
             
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,6 +37,7 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
+            background-image: radial-gradient(circle at 50% 0%, rgba(127, 42, 255, 0.1) 0%, transparent 50%);
         }
 
         h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
@@ -51,212 +45,278 @@
         ul { list-style: none; }
         img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
 
-        /* Container Responsivo */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
+        /* Container Centralizado */
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+        .section-padding { padding: 8rem 0; }
 
-        .section-padding { padding: 7rem 0; }
+        /* --- 2. ANIMAÇÕES PREMIUM (KEYFRAMES) --- */
+        @keyframes pulseGlow { 0% { opacity: 0.15; transform: translateX(-50%) scale(1); } 100% { opacity: 0.3; transform: translateX(-50%) scale(1.1); } }
+        @keyframes beamMove { 0% { transform: translateX(-50%) rotate(0deg); opacity: 0.2; } 50% { opacity: 0.4; } 100% { transform: translateX(-50%) rotate(5deg); opacity: 0.2; } }
+        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+        @keyframes shineText { to { background-position: 200% center; } }
 
-        /* --- 2. EFEITOS VISUAIS --- */
+        /* Scroll Reveal (Classe adicionada via JS ou HTML) */
+        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Luzes de Fundo */
         .ambient-light {
             position: fixed; top: -30%; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 800px; background: var(--primary); filter: blur(200px);
-            opacity: 0.2; z-index: 0; pointer-events: none;
+            width: 80%; height: 800px; 
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            filter: blur(180px); opacity: 0.2; z-index: 0; pointer-events: none;
+            animation: pulseGlow 8s infinite alternate;
         }
         .beam {
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 1px; height: 100vh; background: linear-gradient(to bottom, var(--primary), transparent);
-            opacity: 0.3; z-index: 0;
+            position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+            width: 2px; height: 120vh; 
+            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+            opacity: 0.3; z-index: 0; filter: blur(2px);
+            animation: beamMove 10s infinite alternate;
         }
 
-        /* --- 3. UI COMPONENTS --- */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 32px; border-radius: 50px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: var(--transition);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, #4c0bb3 100%); color: white;
-            box-shadow: 0 4px 20px rgba(108,19,226, 0.3); border: 1px solid rgba(255,255,255,0.1);
-        }
-        .btn-primary:hover {
-            box-shadow: 0 6px 30px rgba(108,19,226, 0.6); transform: translateY(-2px); border-color: var(--accent);
-        }
-        .btn-outline {
-            background: transparent; border: 1px solid var(--border-color); color: white;
-        }
-        .btn-outline:hover {
-            border-color: var(--accent); background: rgba(108,19,226, 0.1);
-        }
-
-        /* Glass Card */
+        /* --- 3. UI PREMIUM: CARDS E BOTÕES --- */
+        
+        /* Glass Card com Borda Brilhante (Shining Border) */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            backdrop-filter: blur(12px);
-            border-radius: 20px; padding: 2.5rem;
-            position: relative; overflow: hidden;
-            transition: var(--transition);
+            backdrop-filter: blur(12px); border-radius: 24px; padding: 2.5rem;
+            position: relative; overflow: hidden; transition: var(--transition);
+            /* Layout interno */
             display: flex; flex-direction: column; justify-content: center; height: 100%;
         }
-        .glass-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        /* O Efeito Mágico da Borda */
+        .glass-card::before {
+            content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 2px;
+            background: linear-gradient(135deg, transparent, var(--primary), var(--accent), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            opacity: 0; transition: opacity 0.5s ease; pointer-events: none;
+        }
+        .glass-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5); border-color: transparent; }
+        .glass-card:hover::before { opacity: 1; }
+
+        /* Botões Magnéticos com Brilho */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 16px 36px; border-radius: 100px; font-weight: 600; font-size: 1rem; 
+            cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; z-index: 1;
+        }
+        .btn-primary {
+            background: var(--primary); color: white; border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px -10px rgba(127, 42, 255, 0.5);
+        }
+        /* Brilho passando no botão */
+        .btn-primary::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.6s; z-index: -1;
+        }
+        .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(127, 42, 255, 0.7); }
+        .btn-primary:hover::after { left: 100%; }
+
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: white; }
+        .btn-outline:hover { border-color: var(--accent); background: rgba(127, 42, 255, 0.1); }
 
         /* --- 4. HEADER --- */
         header {
             position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 0;
-            background: rgba(5, 5, 5, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(3, 3, 5, 0.85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: 1px; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: white; letter-spacing: 1px; }
         .logo span { color: var(--accent); }
-        
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
-        .nav-links a:hover { color: white; }
-        
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: 0.3s; }
+        .nav-links a:hover { color: white; } .nav-links a:hover::after { width: 100%; }
         .header-cta { display: inline-flex; }
         .mobile-btn { display: none; font-size: 1.8rem; cursor: pointer; color: white; }
 
         /* --- 5. HERO SECTION --- */
         .hero { padding-top: 180px; padding-bottom: 120px; text-align: center; position: relative; }
+        
+        /* Tag Animada */
+        .hero-tag {
+            display: inline-block; padding: 10px 24px; border-radius: 50px;
+            background: rgba(127, 42, 255, 0.15); border: 1px solid rgba(127, 42, 255, 0.3);
+            color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 2.5rem;
+            animation: float 4s ease-in-out infinite alternate;
+        }
+
         .hero h1 {
-            font-size: 3.8rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800;
-            background: linear-gradient(180deg, #FFFFFF 0%, #A0A0A0 100%);
+            font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800;
+            /* Texto Gradiente Animado */
+            background: linear-gradient(to right, #FFFFFF 20%, #b3b3b3 50%, var(--accent) 80%);
+            background-size: 200% auto; animation: shineText 6s linear infinite;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 3rem; }
         
-        .badges { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
-        .badge { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
-        .badge i { color: var(--accent); }
+        .badges { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        .badge { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.95rem; }
+        .badge i { color: var(--accent); font-size: 1.2rem; filter: drop-shadow(0 0 5px var(--primary)); }
 
         /* --- 6. ABOUT --- */
-        .about-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 4rem; align-items: center; }
-        .about-img-wrapper { position: relative; width: 100%; display: flex; justify-content: center; }
-        .about-img { border-radius: 20px; width: 100%; max-width: 500px; box-shadow: 0 0 0 1px var(--border-color), 0 20px 50px rgba(0,0,0,0.5); position: relative; z-index: 1; }
-        .about-glow { position: absolute; width: 100%; height: 100%; top: 10px; left: 0; background: var(--primary); filter: blur(60px); opacity: 0.3; z-index: 0; border-radius: 20px; }
+        .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: center; }
+        .about-img-wrapper { position: relative; width: 100%; display: flex; justify-content: center; transition: var(--transition); }
+        .about-img-wrapper:hover { transform: scale(1.02); }
+        .about-img { border-radius: 24px; width: 100%; max-width: 500px; box-shadow: 0 0 0 1px var(--border-color), 0 30px 60px rgba(0,0,0,0.6); position: relative; z-index: 1; }
+        .about-glow { position: absolute; width: 120%; height: 120%; top: -10%; left: -10%; background: var(--primary); filter: blur(80px); opacity: 0.25; z-index: 0; animation: pulseGlow 6s infinite; }
         
-        .about-list { margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .about-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: var(--text-muted); }
-        .about-item i { color: var(--primary); font-size: 1.2rem; }
+        .about-list { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .about-item { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: white; font-weight: 500; }
+        .about-item i { color: var(--accent); font-size: 1.4rem; background: rgba(127,42,255,0.15); padding: 5px; border-radius: 50%; }
 
         /* --- 7. SERVICES & TOOLS --- */
-        .section-header { text-align: center; margin-bottom: 4rem; max-width: 800px; margin-inline: auto; }
+        .section-header { text-align: center; margin-bottom: 5rem; max-width: 800px; margin-inline: auto; }
         .section-header h2 {
-            font-size: 2.8rem; margin-bottom: 1rem;
-            background: linear-gradient(to right, #fff 20%, #999 100%);
+            font-size: 3rem; margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #fff 40%, #888 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
         
         .service-icon { 
-            width: 50px; height: 50px; background: rgba(108,19,226,0.1); border-radius: 12px;
-            display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent); margin-bottom: 1.5rem;
+            width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), #4c0bb3); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; margin-bottom: 1.8rem;
+            box-shadow: 0 10px 25px rgba(127,42,255,0.3);
         }
-        .glass-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: white; }
+        .glass-card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: white; }
+        .glass-card p { color: var(--text-muted); font-size: 1rem; }
         
-        /* Barra de Ferramentas */
+        /* Ferramentas */
         .tools-bar {
-            margin-top: 4rem; padding: 2rem; background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 100px; display: flex; justify-content: center; flex-wrap: wrap; gap: 3rem; align-items: center;
+            margin-top: 5rem; padding: 2.5rem; background: rgba(20, 20, 25, 0.5); border: 1px solid var(--border-color);
+            border-radius: 100px; display: flex; justify-content: center; flex-wrap: wrap; gap: 3.5rem; align-items: center;
+            backdrop-filter: blur(10px);
         }
-        .tool { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-muted); }
+        .tool { display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--text-muted); transition: 0.3s; }
+        .tool i { font-size: 1.5rem; color: white; transition: 0.3s; }
+        .tool:hover { color: white; } .tool:hover i { color: var(--accent); transform: scale(1.2); text-shadow: 0 0 15px var(--primary); }
 
         /* --- 8. BENTO GRID --- */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; grid-auto-rows: 1fr; }
-        .bento-item { padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
-        .bento-wide { grid-column: span 2; background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(108,19,226,0.05)); }
+        .bento-item { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
+        .bento-wide { grid-column: span 2; background: linear-gradient(145deg, rgba(127,42,255,0.05), rgba(20,20,25,0.4)); }
         .bento-full { grid-column: span 3; }
         .bento-grid .glass-card { justify-content: flex-start; }
         .bento-icon {
-            font-size: 2.2rem; color: var(--accent); margin-bottom: 1.2rem; background: rgba(108,19,226,0.1);
-            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 14px;
+            font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 10px rgba(127,42,255,0.4));
         }
 
         /* --- 9. INCLUDED --- */
-        .included-box { background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0) 100%); border: 1px solid var(--border-color); border-radius: 24px; padding: 4rem; }
-        .checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-        .check-item { display: flex; align-items: center; gap: 12px; color: white; font-weight: 500; }
-        .check-item i { color: var(--accent); font-size: 1.3rem; }
+        .included-box { 
+            background: linear-gradient(180deg, rgba(127,42,255,0.05) 0%, rgba(5,5,5,0.8) 100%); 
+            border: 1px solid var(--border-color); border-radius: 30px; padding: 5rem; 
+            position: relative; overflow: hidden; 
+        }
+        .included-box::before { content: ''; position: absolute; top: 0; left: 50%; width: 50%; height: 4px; background: var(--primary); filter: blur(20px); transform: translateX(-50%); }
+        
+        .checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+        .check-item { display: flex; align-items: center; gap: 15px; color: white; font-weight: 600; font-size: 1.1rem; }
+        .check-item i { color: var(--accent); font-size: 1.4rem; background: rgba(127,42,255,0.2); padding: 5px; border-radius: 50%; }
 
         /* --- 10. PORTFOLIO CAROUSEL --- */
-        .carousel-wrapper { position: relative; max-width: 1200px; margin: 0 auto; }
-        .carousel-track-container { overflow: hidden; padding: 1rem 0 3rem 0; }
+        .carousel-wrapper { position: relative; max-width: 1220px; margin: 0 auto; }
+        .carousel-track-container { overflow: visible; padding: 2rem 0 4rem 0; }
         .carousel-track {
-            display: flex; gap: 2rem; overflow-x: auto;
-            scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab;
+            display: flex; gap: 2.5rem; overflow-x: auto;
+            scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; padding: 0 10px;
         }
         .carousel-track::-webkit-scrollbar { display: none; }
         
         .portfolio-card {
-            flex: 0 0 380px; scroll-snap-align: center;
-            border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); background: var(--card-bg); transition: var(--transition);
+            flex: 0 0 400px; scroll-snap-align: center;
+            border-radius: 20px; overflow: hidden; border: 1px solid var(--border-color); background: var(--card-bg); transition: var(--transition);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
         }
-        .portfolio-media { height: 220px; width: 100%; background: #000; position: relative; }
-        .portfolio-media img { width: 100%; height: 100%; object-fit: contain; background: linear-gradient(to bottom, #1a1a1a, #050505); }
-        .portfolio-info { padding: 1.2rem; background: #0a0a0a; border-top: 1px solid var(--border-color); }
+        .portfolio-card:hover { transform: translateY(-15px) scale(1.02); border-color: var(--accent); box-shadow: 0 25px 60px -15px rgba(127, 42, 255, 0.2); }
+        
+        .portfolio-media { height: 240px; width: 100%; background: #000; position: relative; overflow: hidden; }
+        .portfolio-media img { width: 100%; height: 100%; object-fit: contain; background: linear-gradient(to bottom, #1a1a1a, #050505); transition: 0.6s; }
+        .portfolio-card:hover img { transform: scale(1.05); }
+        .portfolio-info { padding: 1.5rem; background: #0a0a0a; border-top: 1px solid var(--border-color); position: relative; z-index: 2; }
 
         .nav-btn {
             position: absolute; top: 40%; transform: translateY(-50%);
-            width: 45px; height: 45px; border-radius: 50%;
-            background: rgba(10, 10, 10, 0.8); border: 1px solid var(--border-color);
+            width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(10, 10, 10, 0.7); border: 1px solid rgba(255,255,255,0.1);
             color: white; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 10; transition: 0.3s;
+            cursor: pointer; z-index: 10; transition: 0.3s; backdrop-filter: blur(5px);
         }
-        .nav-btn:hover { background: var(--primary); }
+        .nav-btn:hover { background: var(--primary); border-color: var(--accent); transform: scale(1.1); box-shadow: 0 0 20px var(--primary); }
         .prev-p { left: -25px; } .next-p { right: -25px; }
 
         /* VÍDEOS DESTAQUE */
         .video-showcase {
-            margin-top: 4rem; padding: 3rem;
-            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0));
-            border: 1px solid var(--border-color); border-radius: 24px; text-align: center;
+            margin-top: 6rem; padding: 4rem;
+            background: linear-gradient(180deg, rgba(127,42,255,0.05), rgba(0,0,0,0));
+            border: 1px solid var(--border-color); border-radius: 30px; text-align: center;
+            position: relative; overflow: hidden;
         }
-        .videos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
-        .video-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 16px; padding: 1rem; }
-        .video-container { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); aspect-ratio: 16/10; }
+        /* Luz de fundo do vídeo */
+        .video-showcase::after {
+            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 50%; background: var(--primary); filter: blur(150px); opacity: 0.15;
+        }
+
+        .videos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 4rem; position: relative; z-index: 1; }
+        .video-card { background: rgba(20, 20, 25, 0.8); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; transition: var(--transition); }
+        .video-card:hover { border-color: var(--primary); box-shadow: 0 20px 50px rgba(127,42,255,0.15); transform: translateY(-8px); }
+        .video-container { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); aspect-ratio: 16/10; }
         .video-container video { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .video-info { margin-top: 1.5rem; text-align: left; }
-        .video-badge { display: inline-block; padding: 5px 12px; background: var(--primary); color: white; font-size: 0.75rem; border-radius: 20px; margin-bottom: 0.8rem; font-weight: 600; }
+        .video-info { margin-top: 1.8rem; text-align: left; }
+        .video-badge { display: inline-block; padding: 6px 14px; background: var(--primary); color: white; font-size: 0.8rem; border-radius: 20px; margin-bottom: 0.8rem; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(127,42,255,0.4); }
 
         /* --- 11. DEPOIMENTOS --- */
         .testimonial-card {
-            flex: 0 0 400px; scroll-snap-align: center;
-            background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-            border: 1px solid var(--border-color); padding: 2.5rem; border-radius: 16px;
+            flex: 0 0 420px; scroll-snap-align: center;
+            background: linear-gradient(145deg, rgba(30,30,35,0.9), rgba(10,10,12,0.9));
+            border: 1px solid var(--border-color); padding: 3rem; border-radius: 24px;
             display: flex; flex-direction: column; justify-content: space-between;
+            transition: var(--transition); position: relative;
         }
-        .quote-icon { font-size: 2rem; color: var(--primary); opacity: 0.5; margin-bottom: 1rem; }
-        .stars { color: #F59E0B; margin-bottom: 10px; font-size: 1rem; letter-spacing: 2px; }
+        .testimonial-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .quote-icon { font-size: 2.5rem; color: var(--primary); opacity: 0.8; margin-bottom: 1.5rem; filter: drop-shadow(0 0 10px var(--primary)); }
+        .stars { color: #FFC107; margin-bottom: 12px; font-size: 1.1rem; letter-spacing: 3px; filter: drop-shadow(0 0 5px #FFC107); }
 
         /* --- 12. PROCESSO --- */
-        .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
-        .step-card { text-align: center; padding: 2rem 1rem; }
-        .step-title { font-size: 1.2rem; font-weight: 700; margin: 1rem 0 0.5rem; color: white; }
+        .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; position: relative; }
+        .step-card { text-align: center; padding: 2rem 1rem; position: relative; }
+        /* Linha decorativa */
+        .process-steps::before { content: ''; position: absolute; top: 20px; left: 5%; width: 90%; height: 2px; background: linear-gradient(to right, transparent, var(--border-color), transparent); z-index: 0; }
+        .step-card::before {
+            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 40px; height: 40px; background: var(--card-bg); border: 2px solid var(--primary); border-radius: 50%;
+            z-index: 1; box-shadow: 0 0 15px rgba(127,42,255,0.4);
+        }
+        .step-title { font-size: 1.3rem; font-weight: 700; margin: 3.5rem 0 0.8rem; color: white; }
 
         /* --- 13. CTA & FOOTER --- */
         .cta-section {
-            background: radial-gradient(circle at center, rgba(108,19,226,0.2) 0%, rgba(5,5,5,1) 70%);
-            border: 1px solid var(--border-color); border-radius: 24px; text-align: center; padding: 6rem 2rem;
+            background: radial-gradient(circle at center, rgba(127,42,255,0.25) 0%, rgba(5,5,5,1) 80%);
+            border: 1px solid var(--border-color); border-radius: 40px; text-align: center; padding: 8rem 2rem;
+            position: relative; overflow: hidden;
         }
-        footer { border-top: 1px solid var(--border-color); padding: 4rem 0 2rem; text-align: center; }
-        .socials { display: flex; justify-content: center; gap: 1.5rem; margin: 2rem 0; flex-wrap: wrap; }
+        .cta-section h2 { font-size: 3.5rem; }
+        
+        footer { border-top: 1px solid var(--border-color); padding: 5rem 0 3rem; text-align: center; background: #020203; }
+        .socials { display: flex; justify-content: center; gap: 1.5rem; margin: 3rem 0; flex-wrap: wrap; }
         .social-btn {
-            width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.05);
-            display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;
-            border: 1px solid transparent;
+            width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.03);
+            display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem;
+            border: 1px solid var(--border-color); transition: var(--transition);
         }
+        .social-btn:hover { background: var(--primary); border-color: var(--accent); transform: scale(1.1) rotate(10deg); box-shadow: 0 0 25px var(--primary); }
 
         /* =========================================
-           RESPONSIVIDADE (MOBILE AJUSTADO)
+           RESPONSIVIDADE (MOBILE REFINADO)
         ========================================= */
         @media (max-width: 900px) {
-            .section-padding { padding: 4rem 0; }
+            .section-padding { padding: 5rem 0; }
             .hero h1 { font-size: 3rem; }
             .about-grid { grid-template-columns: 1fr; text-align: center; } 
             .about-list { text-align: left; }
@@ -264,6 +324,7 @@
             .bento-wide, .bento-full { grid-column: span 1; }
             .videos-grid { grid-template-columns: 1fr; }
             .video-info { text-align: center; }
+            .process-steps::before { display: none; } /* Remove linha no tablet/mobile */
         }
 
         @media (max-width: 768px) {
@@ -276,29 +337,31 @@
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.1rem; }
 
-            /* Ferramentas: Ícones Lado a Lado */
+            /* Ícones Lado a Lado no Mobile (Pedido Específico) */
             .tools-bar { 
                 flex-direction: row; 
                 flex-wrap: wrap; 
                 justify-content: center; 
                 gap: 1.5rem; 
                 border-radius: 24px; 
-                padding: 1.5rem;
+                padding: 2rem 1rem;
             }
             .tool { font-size: 0.9rem; }
 
-            /* Centralização Geral */
+            /* Centralização e Ajustes */
             .section-header, .about-grid, .video-showcase { text-align: center; }
-            .about-list { justify-content: center; text-align: center; }
+            .about-list { justify-content: center; text-align: center; grid-template-columns: 1fr; }
             .checklist { grid-template-columns: 1fr; text-align: center; justify-items: center; }
-            .included-box { padding: 2rem 1.5rem; }
+            .included-box { padding: 3rem 1.5rem; }
             
             /* Carrosséis Mobile */
-            .portfolio-card, .testimonial-card { flex: 0 0 85vw; } 
-            .nav-btn { display: none; }
+            .portfolio-card, .testimonial-card { flex: 0 0 88vw; } 
+            .nav-btn { display: none; } /* Navegação por toque */
+            .carousel-track { padding: 0 20px; }
             
             /* Footer */
             .socials { gap: 1rem; }
+            .cta-section { padding: 5rem 1.5rem; border-radius: 30px; } .cta-section h2 { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -318,16 +381,16 @@
                     <li><a href="#depoimentos">Depoimentos</a></li>
                 </ul>
                 <div class="header-cta">
-                    <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Solicitar Orçamento</a>
+                    <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Orçamento</a>
                 </div>
                 <i class="ph ph-list mobile-btn"></i>
             </nav>
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero reveal">
         <div class="container">
-            <div style="display: inline-block; padding: 8px 20px; border-radius: 50px; background: rgba(108,19,226,0.15); border: 1px solid rgba(108,19,226,0.3); color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 2rem;">
+            <div class="hero-tag">
                 ✨ Feito para profissionais que empreendem com propósito!
             </div>
 
@@ -349,14 +412,14 @@
 
     <section class="section-padding">
         <div class="container about-grid">
-            <div class="about-img-wrapper">
+            <div class="about-img-wrapper reveal">
                 <div class="about-glow"></div>
-                <img src="github.png" alt="Elizabeth" class="about-img" loading="lazy">
+                <img src="github.png" alt="Elizabeth" class="about-img">
             </div>
-            <div>
+            <div class="reveal">
                 <h2>Prazer, eu sou a Elizabeth.</h2>
                 <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-weight: 500;">Transformo ideias em páginas profissionais que convertem.</h3>
-                <p style="color: var(--text-muted);">Sou Web Designer e desenvolvedora de Landing Pages e One Pages em WordPress, GitHUB e Figma. Nos últimos anos, ajudei empresas, infoprodutores e profissionais liberais a aumentarem contatos, leads e oportunidades através de páginas estratégicas, rápidas e visualmente impecáveis.</p>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">Sou Web Designer e desenvolvedora de Landing Pages e One Pages em WordPress, GitHUB e Figma. Nos últimos anos, ajudei empresas, infoprodutores e profissionais liberais a aumentarem contatos, leads e oportunidades através de páginas estratégicas, rápidas e visualmente impecáveis.</p>
                 <div class="about-list">
                     <div class="about-item"><i class="ph ph-check-circle"></i> 3+ anos de experiência</div>
                     <div class="about-item"><i class="ph ph-check-circle"></i> Dezenas de projetos entregues</div>
@@ -369,45 +432,45 @@
 
     <section id="servicos" class="section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Serviços oferecidos</h2>
                 <p>Soluções completas para sua presença digital</p>
             </div>
             <div class="services-grid">
-                <div class="glass-card">
+                <div class="glass-card reveal">
                     <div class="service-icon"><i class="ph ph-rocket-launch"></i></div>
                     <h3>Criação de Landing Page</h3>
                     <p>Páginas completas, estratégicas e preparadas para conversão.</p>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card reveal">
                     <div class="service-icon"><i class="ph ph-desktop"></i></div>
                     <h3>Criação de One Page</h3>
                     <p>Sites institucionais modernos, leves e altamente profissionais.</p>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card reveal">
                     <div class="service-icon"><i class="ph ph-wrench"></i></div>
                     <h3>Manutenção WordPress</h3>
                     <p>Ajustes, atualizações, melhorias e otimização.</p>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card reveal">
                     <div class="service-icon"><i class="ph ph-paint-brush"></i></div>
                     <h3>Layouts no Figma</h3>
                     <p>Design profissional e pronto para desenvolvimento.</p>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card reveal">
                     <div class="service-icon"><i class="ph ph-device-mobile"></i></div>
                     <h3>Desenvolvimento Responsivo</h3>
                     <p>Sites rápidos e adaptados para qualquer dispositivo.</p>
                 </div>
-                <div class="glass-card">
+                <div class="glass-card reveal">
                     <div class="service-icon"><i class="ph ph-plugs-connected"></i></div>
                     <h3>SEO e Integrações</h3>
                     <p>Visibilidade no Google e conexão com WhatsApp, CRM e e-mail.</p>
                 </div>
             </div>
             
-            <div class="tools-bar">
-                <span style="font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; color:var(--accent);">Tecnologias:</span>
+            <div class="tools-bar reveal">
+                <span style="font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; color:var(--accent); font-weight:700;">Tecnologias:</span>
                 <div class="tool"><i class="ph ph-wordpress-logo"></i> WordPress</div>
                 <div class="tool"><i class="ph ph-layout"></i> Elementor</div>
                 <div class="tool"><i class="ph ph-github-logo"></i> Github</div>
@@ -419,32 +482,32 @@
 
     <section class="section-padding">
         <div class="container">
-            <div class="section-header"><h2>Por que escolher a VOXO Estúdio?</h2></div>
+            <div class="section-header reveal"><h2>Por que escolher a VOXO Estúdio?</h2></div>
             <div class="bento-grid">
                 
-                <div class="glass-card bento-item bento-wide">
+                <div class="glass-card bento-item bento-wide reveal">
                     <div class="bento-icon"><i class="ph ph-pencil-circle"></i></div>
                     <h3>Design exclusivo</h3>
                     <p>Nada de modelos prontos — cada projeto é único para transmitir a identidade da sua marca.</p>
                 </div>
-                <div class="glass-card bento-item">
+                <div class="glass-card bento-item reveal">
                     <div class="bento-icon"><i class="ph ph-lightning"></i></div>
                     <h3>Processo rápido</h3>
                     <p>Transparência em cada etapa.</p>
                 </div>
 
-                <div class="glass-card bento-item">
+                <div class="glass-card bento-item reveal">
                     <div class="bento-icon"><i class="ph ph-device-mobile-camera"></i></div>
                     <h3>Responsividade total</h3>
                     <p>Perfeito no celular e PC.</p>
                 </div>
-                <div class="glass-card bento-item bento-wide">
+                <div class="glass-card bento-item bento-wide reveal">
                     <div class="bento-icon"><i class="ph ph-headset"></i></div>
                     <h3>Suporte + revisões + garantia</h3>
                     <p>Ajustes inclusos e 7 dias de manutenção para garantir estabilidade total.</p>
                 </div>
 
-                <div class="glass-card bento-item bento-full">
+                <div class="glass-card bento-item bento-full reveal">
                     <div class="bento-icon"><i class="ph ph-chat-circle-text"></i></div>
                     <h3>Comunicação direta e sem burocracia</h3>
                     <p>Fale diretamente com quem cria o seu projeto, garantindo agilidade e entendimento total das suas necessidades.</p>
@@ -456,7 +519,7 @@
 
     <section class="section-padding">
         <div class="container">
-            <div class="included-box">
+            <div class="included-box reveal">
                 <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
                     <h2>Tudo que sua página precisa para performar</h2>
                 </div>
@@ -480,12 +543,12 @@
 
     <section id="portfolio" class="section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Resultados que falam por si</h2>
                 <p>Navegue pelos projetos recentes</p>
             </div>
             
-            <div class="carousel-wrapper">
+            <div class="carousel-wrapper reveal">
                 <button class="nav-btn prev-p" id="prev-portfolio"><i class="ph ph-caret-left"></i></button>
                 <div class="carousel-track-container">
                     <div class="carousel-track" id="track-portfolio">
@@ -511,9 +574,9 @@
                 <button class="nav-btn next-p" id="next-portfolio"><i class="ph ph-caret-right"></i></button>
             </div>
 
-            <div class="video-showcase">
-                <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Projetos Premium em Destaque</h3>
-                <p style="color: var(--text-muted);">Veja a fluidez e o design em movimento.</p>
+            <div class="video-showcase reveal">
+                <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">Projetos Premium em Destaque</h3>
+                <p style="color: var(--text-muted); font-size: 1.1rem;">Veja a fluidez e o design em movimento.</p>
                 
                 <div class="videos-grid">
                     <div class="video-card">
@@ -524,7 +587,7 @@
                         </div>
                         <div class="video-info">
                             <span class="video-badge">PÁGINA DE VENDAS</span>
-                            <h4 style="color: white; font-size: 1.1rem;">VSL Alta Conversão</h4>
+                            <h4 style="color: white; font-size: 1.3rem;">VSL Alta Conversão</h4>
                         </div>
                     </div>
                     <div class="video-card">
@@ -535,13 +598,13 @@
                         </div>
                         <div class="video-info">
                             <span class="video-badge">INSTITUCIONAL</span>
-                            <h4 style="color: white; font-size: 1.1rem;">Nalua Braids</h4>
+                            <h4 style="color: white; font-size: 1.3rem;">Nalua Braids</h4>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 3rem;">
+            <div style="text-align: center; margin-top: 4rem;" class="reveal">
                 <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="btn btn-outline" rel="noopener noreferrer">Ver portfólio completo no Behance</a>
             </div>
         </div>
@@ -549,48 +612,48 @@
 
     <section id="processo" class="section-padding">
         <div class="container">
-            <div class="section-header"><h2>Como funciona trabalhar com a VOXO</h2></div>
-            <div class="process-steps">
-                <div class="step-card"><div class="step-title">Briefing</div><p style="font-size: 0.9rem; color: var(--text-muted);">Entendo seu negócio e objetivos.</p></div>
-                <div class="step-card"><div class="step-title">Design</div><p style="font-size: 0.9rem; color: var(--text-muted);">Criação do layout com foco em conversão.</p></div>
-                <div class="step-card"><div class="step-title">Dev</div><p style="font-size: 0.9rem; color: var(--text-muted);">Página rápida, leve e profissional.</p></div>
-                <div class="step-card"><div class="step-title">Testes</div><p style="font-size: 0.9rem; color: var(--text-muted);">Validação e entrega pronta para conversão.</p></div>
-                <div class="step-card"><div class="step-title">Manutenção</div><p style="font-size: 0.9rem; color: var(--text-muted);">7 dias de suporte pós-entrega.</p></div>
+            <div class="section-header reveal"><h2>Como funciona trabalhar com a VOXO</h2></div>
+            <div class="process-steps reveal">
+                <div class="step-card"><div class="step-title">Briefing</div><p style="font-size: 1rem; color: var(--text-muted);">Entendo seu negócio e objetivos.</p></div>
+                <div class="step-card"><div class="step-title">Design</div><p style="font-size: 1rem; color: var(--text-muted);">Criação do layout com foco em conversão.</p></div>
+                <div class="step-card"><div class="step-title">Dev</div><p style="font-size: 1rem; color: var(--text-muted);">Página rápida, leve e profissional.</p></div>
+                <div class="step-card"><div class="step-title">Testes</div><p style="font-size: 1rem; color: var(--text-muted);">Validação e entrega pronta para conversão.</p></div>
+                <div class="step-card"><div class="step-title">Manutenção</div><p style="font-size: 1rem; color: var(--text-muted);">7 dias de suporte pós-entrega.</p></div>
             </div>
-            <div style="text-align: center; margin-top: 3rem;"><a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Iniciar agora</a></div>
+            <div style="text-align: center; margin-top: 5rem;" class="reveal"><a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Iniciar agora <i class="ph ph-arrow-right"></i></a></div>
         </div>
     </section>
 
     <section id="depoimentos" class="section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>O que dizem meus clientes</h2>
                 <p>Experiências reais de quem confiou no meu trabalho</p>
             </div>
             
-            <div class="carousel-wrapper">
+            <div class="carousel-wrapper reveal">
                 <button class="nav-btn prev-p" id="prev-testim"><i class="ph ph-caret-left"></i></button>
                 <div class="carousel-track-container">
                     <div class="carousel-track" id="track-testim">
                         
                         <div class="testimonial-card">
-                            <div><i class="ph ph-quotes quote-icon"></i><p style="font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem;">"O trabalho ficou excelente. A profissional foi rápida e caprichosa. Entendeu toda a solicitação feita. Recomendo."</p></div>
-                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block;">Sandra Mendes</strong><span style="font-size: 0.85rem; color: var(--accent);">LP Previdenciária</span><div class="date">Dez 2025</div></div>
+                            <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"O trabalho ficou excelente. A profissional foi rápida e caprichosa. Entendeu toda a solicitação feita. Recomendo."</p></div>
+                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Sandra Mendes</strong><span style="font-size: 0.9rem; color: var(--accent);">LP Previdenciária</span><div class="date">Dez 2025</div></div>
                         </div>
 
                         <div class="testimonial-card">
-                            <div><i class="ph ph-quotes quote-icon"></i><p style="font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem;">"O trabalho na criação da página de vendas ficou excelente! Profissional, organizado e com um visual muito atrativo. Superou minhas expectativas."</p></div>
-                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block;">Felipe</strong><span style="font-size: 0.85rem; color: var(--accent);">Página de Vendas</span><div class="date">Nov 2025</div></div>
+                            <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"O trabalho na criação da página de vendas ficou excelente! Profissional, organizado e com um visual muito atrativo. Superou minhas expectativas."</p></div>
+                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Felipe</strong><span style="font-size: 0.9rem; color: var(--accent);">Página de Vendas</span><div class="date">Nov 2025</div></div>
                         </div>
 
                         <div class="testimonial-card">
-                            <div><i class="ph ph-quotes quote-icon"></i><p style="font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem;">Avaliação 5 estrelas sem comentário por escrito.</p></div>
-                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block;">Jucemar G</strong><span style="font-size: 0.85rem; color: var(--accent);">Site Institucional</span><div class="date">Out-Nov 2025</div></div>
+                            <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text" style="opacity: 0.7;">(Avaliação 5 estrelas sem comentário por escrito.)</p></div>
+                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Jucemar G</strong><span style="font-size: 0.9rem; color: var(--accent);">Site Institucional</span><div class="date">Out-Nov 2025</div></div>
                         </div>
 
                         <div class="testimonial-card">
-                            <div><i class="ph ph-quotes quote-icon"></i><p style="font-style: italic; color: var(--text-muted); margin-bottom: 1.5rem;">"Muito profissional, superou as expectativas. Caso precise voltarei a trabalhar novamente."</p></div>
-                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block;">Isael</strong><span style="font-size: 0.85rem; color: var(--accent);">Limpeza Veicular</span><div class="date">Nov 2025</div></div>
+                            <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"Muito profissional, superou as expectativas. Caso precise voltarei a trabalhar novamente."</p></div>
+                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Isael</strong><span style="font-size: 0.9rem; color: var(--accent);">Limpeza Veicular</span><div class="date">Nov 2025</div></div>
                         </div>
 
                     </div>
@@ -600,31 +663,31 @@
         </div>
     </section>
 
-    <section id="contato" class="container" style="margin-bottom: 4rem;">
+    <section id="contato" class="container reveal" style="margin-bottom: 4rem;">
         <div class="cta-section">
-            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Pronta para transformar sua presença online?</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2.5rem;">Crie uma landing page profissional, bonita e feita para converter.</p>
-            <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary" style="padding: 18px 40px; font-size: 1.1rem;">Solicitar orçamento</a>
+            <h2>Pronta para transformar sua presença online?</h2>
+            <p style="color: #ddd; margin-bottom: 3rem; font-size: 1.2rem;">Crie uma landing page profissional, bonita e feita para converter.</p>
+            <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary" style="padding: 20px 48px; font-size: 1.2rem;">Solicitar orçamento</a>
         </div>
     </section>
 
     <footer>
         <div class="container">
             <div class="logo">VOXO <span>Estúdio</span></div>
-            <p style="color: var(--text-muted); margin-top: 10px;">Feito para profissionais que empreendem com propósito!</p>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Feito para profissionais que empreendem com propósito!</p>
             <div class="socials">
                 <a href="https://www.instagram.com/voxoestudio/" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-instagram-logo"></i></a>
                 <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-behance-logo"></i></a>
                 <a href="https://www.99freelas.com.br/user/LizGomes" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-briefcase"></i></a>
                 <a href="mailto:contato@voxoestudio.com.br" class="social-btn"><i class="ph ph-envelope"></i></a>
             </div>
-            <ul style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+            <ul style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-bottom: 3rem; color: var(--text-muted); font-size: 1rem; font-weight: 500;">
                 <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#portfolio">Portfólio</a></li>
                 <li><a href="#depoimentos">Depoimentos</a></li>
                 <li><a href="#processo">Processo</a></li>
             </ul>
-            <p style="font-size: 0.8rem; color: #555;">© 2025 VOXO Estúdio – Todos os direitos reservados</p>
+            <p style="font-size: 0.9rem; color: #666;">© 2025 VOXO Estúdio – Todos os direitos reservados</p>
         </div>
     </footer>
 
@@ -636,49 +699,43 @@
             nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
             if(nav.style.display === 'flex') {
                 nav.style.position='absolute'; nav.style.top='70px'; nav.style.left='0'; nav.style.right='0';
-                nav.style.background='#050505'; nav.style.flexDirection='column'; nav.style.padding='2rem'; nav.style.borderBottom='1px solid #333';
+                nav.style.background='rgba(5,5,5,0.95)'; nav.style.backdropFilter='blur(10px)'; nav.style.flexDirection='column'; nav.style.padding='2rem'; nav.style.borderBottom='1px solid #333'; nav.style.zIndex='101';
             }
         });
 
-        // Hover Effect
-        document.querySelectorAll('.glass-card, .portfolio-card, .testimonial-card, .video-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-            });
-        });
+        // SCROLL REVEAL ANIMATION (Ativa a classe .reveal.active ao rolar)
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            for (let i = 0; i < revealElements.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = revealElements[i].getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    revealElements[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Trigger inicial
 
-        // --- FUNÇÃO DE CARROSSEL ---
+        // CARROSSEL FUNÇÃO (Genérica para Portfolio e Depoimentos)
         function initCarousel(trackId, prevBtnId, nextBtnId, scrollAmount) {
             const track = document.getElementById(trackId);
             const prevBtn = document.getElementById(prevBtnId);
             const nextBtn = document.getElementById(nextBtnId);
-
             if(!track || !prevBtn || !nextBtn) return;
 
             prevBtn.addEventListener('click', () => { track.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
             nextBtn.addEventListener('click', () => { track.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
 
-            let isDown = false;
-            let startX, scrollLeft;
-
-            track.addEventListener('mousedown', (e) => {
-                isDown = true; track.style.cursor = 'grabbing'; track.style.scrollSnapType = 'none';
-                startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft;
-            });
+            let isDown = false; let startX, scrollLeft;
+            track.addEventListener('mousedown', (e) => { isDown = true; track.style.cursor = 'grabbing'; track.style.scrollSnapType = 'none'; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
             track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; track.style.scrollSnapType = 'x mandatory'; });
             track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; track.style.scrollSnapType = 'x mandatory'; });
-            track.addEventListener('mousemove', (e) => {
-                if(!isDown) return; e.preventDefault();
-                const x = e.pageX - track.offsetLeft; const walk = (x - startX) * 2;
-                track.scrollLeft = scrollLeft - walk;
-            });
+            track.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; const walk = (x - startX) * 2; track.scrollLeft = scrollLeft - walk; });
         }
-
-        initCarousel('track-portfolio', 'prev-portfolio', 'next-portfolio', 380);
-        initCarousel('track-testim', 'prev-testim', 'next-testim', 400);
-
+        initCarousel('track-portfolio', 'prev-portfolio', 'next-portfolio', 420);
+        initCarousel('track-testim', 'prev-testim', 'next-testim', 450);
     </script>
 </body>
 </html>
