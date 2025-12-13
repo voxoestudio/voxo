@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VOXO Estúdio - Sites profissionais que geram resultados. Web Design Estratégico.">
-    <title>VOXO Estúdio | Web Design Estratégico</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="description" content="VOXO Estúdio - Criação de Landing Pages de alta conversão e sites estratégicos para quem empreende com propósito.">
+    <meta name="author" content="Elizabeth - VOXO Estúdio">
+    <meta name="theme-color" content="#6C13E2"> <title>VOXO Estúdio | Web Design Estratégico</title>
+
+    <link rel="icon" type="image/png" href="https://voxoestudio.com.br/wp-content/uploads/2025/12/favicon-placeholder.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://voxoestudio.com.br/">
+    <meta property="og:title" content="VOXO Estúdio | Web Design Estratégico">
+    <meta property="og:description" content="Transforme visitantes em clientes com Landing Pages de alta conversão. Design exclusivo e estratégico.">
+    <meta property="og:image" content="https://voxoestudio.com.br/wp-content/uploads/2025/12/social-share-image.jpg"> <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -29,6 +36,8 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
@@ -42,7 +51,7 @@
         ul { list-style: none; }
         img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
 
-        /* Container */
+        /* Container Responsivo */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -85,7 +94,7 @@
             border-color: var(--accent); background: rgba(108,19,226, 0.1);
         }
 
-        /* Glass Card Genérico */
+        /* Glass Card */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -93,9 +102,7 @@
             border-radius: 20px; padding: 2.5rem;
             position: relative; overflow: hidden;
             transition: var(--transition);
-            /* Garante que o conteúdo interno preencha a altura se necessário */
-            display: flex; flex-direction: column; justify-content: center;
-            height: 100%; 
+            display: flex; flex-direction: column; justify-content: center; height: 100%;
         }
         .glass-card:hover { border-color: var(--primary); transform: translateY(-5px); }
 
@@ -107,9 +114,11 @@
         nav { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: 1px; }
         .logo span { color: var(--accent); }
+        
         .nav-links { display: flex; gap: 2rem; }
         .nav-links a { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
         .nav-links a:hover { color: white; }
+        
         .header-cta { display: inline-flex; }
         .mobile-btn { display: none; font-size: 1.8rem; cursor: pointer; color: white; }
 
@@ -121,6 +130,7 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; }
+        
         .badges { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
         .badge { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
         .badge i { color: var(--accent); }
@@ -130,6 +140,7 @@
         .about-img-wrapper { position: relative; width: 100%; display: flex; justify-content: center; }
         .about-img { border-radius: 20px; width: 100%; max-width: 500px; box-shadow: 0 0 0 1px var(--border-color), 0 20px 50px rgba(0,0,0,0.5); position: relative; z-index: 1; }
         .about-glow { position: absolute; width: 100%; height: 100%; top: 10px; left: 0; background: var(--primary); filter: blur(60px); opacity: 0.3; z-index: 0; border-radius: 20px; }
+        
         .about-list { margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .about-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: var(--text-muted); }
         .about-item i { color: var(--primary); font-size: 1.2rem; }
@@ -142,47 +153,29 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        
         .service-icon { 
             width: 50px; height: 50px; background: rgba(108,19,226,0.1); border-radius: 12px;
             display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent); margin-bottom: 1.5rem;
         }
         .glass-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: white; }
         
+        /* Barra de Ferramentas */
         .tools-bar {
             margin-top: 4rem; padding: 2rem; background: var(--card-bg); border: 1px solid var(--border-color);
             border-radius: 100px; display: flex; justify-content: center; flex-wrap: wrap; gap: 3rem; align-items: center;
         }
         .tool { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-muted); }
 
-        /* --- 8. BENTO GRID (CORRIGIDO E MELHORADO) --- */
-        .bento-grid { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 1.5rem; 
-            /* Isso garante que as linhas tenham altura igual */
-            grid-auto-rows: 1fr; 
-        }
-        
-        /* Itens do Bento */
-        .bento-wide { grid-column: span 2; }
-        .bento-full { grid-column: span 3; } /* Novo: ocupa linha inteira */
-
-        /* Ajuste específico para os cards dentro do Bento ficarem alinhados */
-        .bento-grid .glass-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; /* Alinha tudo ao topo */
-            height: 100%;
-        }
-        
+        /* --- 8. BENTO GRID --- */
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; grid-auto-rows: 1fr; }
+        .bento-item { padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
+        .bento-wide { grid-column: span 2; background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(108,19,226,0.05)); }
+        .bento-full { grid-column: span 3; }
+        .bento-grid .glass-card { justify-content: flex-start; }
         .bento-icon {
-            font-size: 2.2rem; 
-            color: var(--accent); 
-            margin-bottom: 1.2rem;
-            background: rgba(108,19,226,0.1);
-            width: 60px; height: 60px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 14px;
+            font-size: 2.2rem; color: var(--accent); margin-bottom: 1.2rem; background: rgba(108,19,226,0.1);
+            width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 14px;
         }
 
         /* --- 9. INCLUDED --- */
@@ -199,6 +192,7 @@
             scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab;
         }
         .carousel-track::-webkit-scrollbar { display: none; }
+        
         .portfolio-card {
             flex: 0 0 380px; scroll-snap-align: center;
             border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); background: var(--card-bg); transition: var(--transition);
@@ -206,6 +200,7 @@
         .portfolio-media { height: 220px; width: 100%; background: #000; position: relative; }
         .portfolio-media img { width: 100%; height: 100%; object-fit: contain; background: linear-gradient(to bottom, #1a1a1a, #050505); }
         .portfolio-info { padding: 1.2rem; background: #0a0a0a; border-top: 1px solid var(--border-color); }
+
         .nav-btn {
             position: absolute; top: 40%; transform: translateY(-50%);
             width: 45px; height: 45px; border-radius: 50%;
@@ -266,25 +261,43 @@
             .about-grid { grid-template-columns: 1fr; text-align: center; } 
             .about-list { text-align: left; }
             .bento-grid { grid-template-columns: 1fr; }
-            .bento-wide, .bento-full { grid-column: span 1; } /* Remove spans no tablet */
+            .bento-wide, .bento-full { grid-column: span 1; }
             .videos-grid { grid-template-columns: 1fr; }
             .video-info { text-align: center; }
         }
 
         @media (max-width: 768px) {
+            /* Header */
             .nav-links, .header-cta { display: none; } 
             .mobile-btn { display: block; }
+
+            /* Hero */
             .hero { padding-top: 140px; padding-bottom: 60px; }
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.1rem; }
-            .tools-bar { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 1.5rem; border-radius: 24px; padding: 1.5rem; }
+
+            /* Ferramentas: Ícones Lado a Lado */
+            .tools-bar { 
+                flex-direction: row; 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 1.5rem; 
+                border-radius: 24px; 
+                padding: 1.5rem;
+            }
             .tool { font-size: 0.9rem; }
+
+            /* Centralização Geral */
             .section-header, .about-grid, .video-showcase { text-align: center; }
-            .about-list { justify-content: center; }
+            .about-list { justify-content: center; text-align: center; }
             .checklist { grid-template-columns: 1fr; text-align: center; justify-items: center; }
             .included-box { padding: 2rem 1.5rem; }
+            
+            /* Carrosséis Mobile */
             .portfolio-card, .testimonial-card { flex: 0 0 85vw; } 
             .nav-btn { display: none; }
+            
+            /* Footer */
             .socials { gap: 1rem; }
         }
     </style>
@@ -338,7 +351,7 @@
         <div class="container about-grid">
             <div class="about-img-wrapper">
                 <div class="about-glow"></div>
-                <img src="github.png" alt="Elizabeth" class="about-img">
+                <img src="github.png" alt="Elizabeth" class="about-img" loading="lazy">
             </div>
             <div>
                 <h2>Prazer, eu sou a Elizabeth.</h2>
@@ -477,21 +490,21 @@
                 <div class="carousel-track-container">
                     <div class="carousel-track" id="track-portfolio">
                         
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-sandramendesprev.com_.br_-e1765384296454.png" alt="Projeto"></div><div class="portfolio-info"><h3>Previdenciária</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png" alt="Projeto"></div><div class="portfolio-info"><h3>Página de Vendas</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-swater.us_-e1765561026146.png" alt="Projeto"></div><div class="portfolio-info"><h3>Limpeza Veicular</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-4-e1765384284664.png" alt="Projeto"></div><div class="portfolio-info"><h3>Portfólio Pessoal</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-3.png" alt="Projeto"></div><div class="portfolio-info"><h3>Design Moderno</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-2-e1765384262573.png" alt="Projeto"></div><div class="portfolio-info"><h3>One Page Tech</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io_-e1765559141857.png" alt="Projeto"></div><div class="portfolio-info"><h3>Landing Estratégica</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-1-e1765384241650.png" alt="Projeto"></div><div class="portfolio-info"><h3>Dark Mode UI</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-audexa.com_.br_-e1765384381310.png" alt="Projeto"></div><div class="portfolio-info"><h3>Audexa Consultoria</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissvieira.com_.png" alt="Projeto"></div><div class="portfolio-info"><h3>Dra. Thaiss Vieira</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voirdestinos.com_.br_-e1765561007273.png" alt="Projeto"></div><div class="portfolio-info"><h3>Voir Destinos</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-thanavida.com_.br_.png" alt="Projeto"></div><div class="portfolio-info"><h3>Thana Vida</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-pandaamarelo.com_.br_-e1765561049226.png" alt="Projeto"></div><div class="portfolio-info"><h3>Panda Amarelo</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissilvavieira.com_.png" alt="Projeto"></div><div class="portfolio-info"><h3>Clínica Médica</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-josueejuizes.com_.br_-e1765561075692.png" alt="Projeto"></div><div class="portfolio-info"><h3>Josué e Juízes</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-sandramendesprev.com_.br_-e1765384296454.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Previdenciária</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Página de Vendas</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-swater.us_-e1765561026146.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Limpeza Veicular</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-4-e1765384284664.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Portfólio Pessoal</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-3.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Design Moderno</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-2-e1765384262573.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>One Page Tech</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io_-e1765559141857.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Landing Estratégica</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-1-e1765384241650.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Dark Mode UI</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-audexa.com_.br_-e1765384381310.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Audexa Consultoria</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissvieira.com_.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Dra. Thaiss Vieira</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voirdestinos.com_.br_-e1765561007273.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Voir Destinos</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-thanavida.com_.br_.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Thana Vida</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-pandaamarelo.com_.br_-e1765561049226.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Panda Amarelo</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissilvavieira.com_.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Clínica Médica</h3></div></div>
+                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-josueejuizes.com_.br_-e1765561075692.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Josué e Juízes</h3></div></div>
 
                     </div>
                 </div>
@@ -505,7 +518,7 @@
                 <div class="videos-grid">
                     <div class="video-card">
                         <div class="video-container">
-                            <video autoplay muted loop playsinline controls poster="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png">
+                            <video autoplay muted loop playsinline controls poster="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png" loading="lazy">
                                 <source src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com-f_vfzi1-nh9ckt.webm" type="video/webm">
                             </video>
                         </div>
@@ -516,7 +529,7 @@
                     </div>
                     <div class="video-card">
                         <div class="video-container">
-                            <video autoplay muted loop playsinline controls>
+                            <video autoplay muted loop playsinline controls loading="lazy">
                                 <source src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-naluabraids.com_.br-cyirnho5yq5s4l.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -529,7 +542,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 3rem;">
-                <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="btn btn-outline">Ver portfólio completo no Behance</a>
+                <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="btn btn-outline" rel="noopener noreferrer">Ver portfólio completo no Behance</a>
             </div>
         </div>
     </section>
@@ -600,9 +613,9 @@
             <div class="logo">VOXO <span>Estúdio</span></div>
             <p style="color: var(--text-muted); margin-top: 10px;">Feito para profissionais que empreendem com propósito!</p>
             <div class="socials">
-                <a href="https://www.instagram.com/voxoestudio/" target="_blank" class="social-btn"><i class="ph ph-instagram-logo"></i></a>
-                <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="social-btn"><i class="ph ph-behance-logo"></i></a>
-                <a href="https://www.99freelas.com.br/user/LizGomes" target="_blank" class="social-btn"><i class="ph ph-briefcase"></i></a>
+                <a href="https://www.instagram.com/voxoestudio/" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-instagram-logo"></i></a>
+                <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-behance-logo"></i></a>
+                <a href="https://www.99freelas.com.br/user/LizGomes" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-briefcase"></i></a>
                 <a href="mailto:contato@voxoestudio.com.br" class="social-btn"><i class="ph ph-envelope"></i></a>
             </div>
             <ul style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 2rem; color: var(--text-muted); font-size: 0.9rem;">
@@ -628,7 +641,7 @@
         });
 
         // Hover Effect
-        document.querySelectorAll('.card, .portfolio-card, .testimonial-card, .video-card').forEach(card => {
+        document.querySelectorAll('.glass-card, .portfolio-card, .testimonial-card, .video-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
                 card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
