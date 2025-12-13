@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VOXO Estúdio - Sites profissionais que geram resultados. Web Design Estratégico.">
+    <meta name="description" content="VOXO Estúdio - Criação de Landing Pages de alta conversão e sites estratégicos para quem empreende com propósito.">
     <title>VOXO Estúdio | Web Design Estratégico</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,13 +13,13 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* --- 1. CONFIGURAÇÕES GERAIS E VARIÁVEIS --- */
+        /* --- 1. CONFIGURAÇÕES GERAIS --- */
         :root {
             --bg-color: #030305;          
-            --card-bg: rgba(20, 20, 25, 0.6); /* Vidro mais escuro premium */
+            --card-bg: rgba(20, 20, 25, 0.6); 
             --border-color: rgba(255, 255, 255, 0.08);
             
-            --primary: #7F2AFF; /* Roxo Elétrico */
+            --primary: #7F2AFF; 
             --accent: #C092FF;            
             --text-main: #FFFFFF;
             --text-muted: #9CA3AF;        
@@ -45,21 +45,18 @@
         ul { list-style: none; }
         img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
 
-        /* Container Centralizado */
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
         .section-padding { padding: 8rem 0; }
 
-        /* --- 2. ANIMAÇÕES PREMIUM (KEYFRAMES) --- */
+        /* --- 2. ANIMAÇÕES --- */
         @keyframes pulseGlow { 0% { opacity: 0.15; transform: translateX(-50%) scale(1); } 100% { opacity: 0.3; transform: translateX(-50%) scale(1.1); } }
         @keyframes beamMove { 0% { transform: translateX(-50%) rotate(0deg); opacity: 0.2; } 50% { opacity: 0.4; } 100% { transform: translateX(-50%) rotate(5deg); opacity: 0.2; } }
         @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
         @keyframes shineText { to { background-position: 200% center; } }
 
-        /* Scroll Reveal (Classe adicionada via JS ou HTML) */
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Luzes de Fundo */
         .ambient-light {
             position: fixed; top: -30%; left: 50%; transform: translateX(-50%);
             width: 80%; height: 800px; 
@@ -75,18 +72,14 @@
             animation: beamMove 10s infinite alternate;
         }
 
-        /* --- 3. UI PREMIUM: CARDS E BOTÕES --- */
-        
-        /* Glass Card com Borda Brilhante (Shining Border) */
+        /* --- 3. UI COMPONENTS --- */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             backdrop-filter: blur(12px); border-radius: 24px; padding: 2.5rem;
             position: relative; overflow: hidden; transition: var(--transition);
-            /* Layout interno */
             display: flex; flex-direction: column; justify-content: center; height: 100%;
         }
-        /* O Efeito Mágico da Borda */
         .glass-card::before {
             content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 2px;
             background: linear-gradient(135deg, transparent, var(--primary), var(--accent), transparent);
@@ -97,7 +90,6 @@
         .glass-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5); border-color: transparent; }
         .glass-card:hover::before { opacity: 1; }
 
-        /* Botões Magnéticos com Brilho */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
             padding: 16px 36px; border-radius: 100px; font-weight: 600; font-size: 1rem; 
@@ -107,7 +99,6 @@
             background: var(--primary); color: white; border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 10px 30px -10px rgba(127, 42, 255, 0.5);
         }
-        /* Brilho passando no botão */
         .btn-primary::after {
             content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
@@ -136,48 +127,43 @@
 
         /* --- 5. HERO SECTION --- */
         .hero { padding-top: 180px; padding-bottom: 120px; text-align: center; position: relative; }
-        
-        /* Tag Animada */
         .hero-tag {
             display: inline-block; padding: 10px 24px; border-radius: 50px;
             background: rgba(127, 42, 255, 0.15); border: 1px solid rgba(127, 42, 255, 0.3);
             color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 2.5rem;
             animation: float 4s ease-in-out infinite alternate;
         }
-
         .hero h1 {
             font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800;
-            /* Texto Gradiente Animado */
             background: linear-gradient(to right, #FFFFFF 20%, #b3b3b3 50%, var(--accent) 80%);
             background-size: 200% auto; animation: shineText 6s linear infinite;
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 3rem; }
-        
         .badges { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
         .badge { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.95rem; }
         .badge i { color: var(--accent); font-size: 1.2rem; filter: drop-shadow(0 0 5px var(--primary)); }
 
-        /* --- 6. ABOUT --- */
-        .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: center; }
-        .about-img-wrapper { position: relative; width: 100%; display: flex; justify-content: center; transition: var(--transition); }
-        .about-img-wrapper:hover { transform: scale(1.02); }
-        .about-img { border-radius: 24px; width: 100%; max-width: 500px; box-shadow: 0 0 0 1px var(--border-color), 0 30px 60px rgba(0,0,0,0.6); position: relative; z-index: 1; }
-        .about-glow { position: absolute; width: 120%; height: 120%; top: -10%; left: -10%; background: var(--primary); filter: blur(80px); opacity: 0.25; z-index: 0; animation: pulseGlow 6s infinite; }
-        
-        .about-list { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .about-item { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: white; font-weight: 500; }
-        .about-item i { color: var(--accent); font-size: 1.4rem; background: rgba(127,42,255,0.15); padding: 5px; border-radius: 50%; }
-
-        /* --- 7. SERVICES & TOOLS --- */
+        /* --- 6. SEÇÕES INTERNAS --- */
         .section-header { text-align: center; margin-bottom: 5rem; max-width: 800px; margin-inline: auto; }
         .section-header h2 {
             font-size: 3rem; margin-bottom: 1rem;
             background: linear-gradient(to bottom, #fff 40%, #888 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+
+        /* ABOUT */
+        .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: center; }
+        .about-img-wrapper { position: relative; width: 100%; display: flex; justify-content: center; transition: var(--transition); }
+        .about-img-wrapper:hover { transform: scale(1.02); }
+        .about-img { border-radius: 24px; width: 100%; max-width: 500px; box-shadow: 0 0 0 1px var(--border-color), 0 30px 60px rgba(0,0,0,0.6); position: relative; z-index: 1; }
+        .about-glow { position: absolute; width: 120%; height: 120%; top: -10%; left: -10%; background: var(--primary); filter: blur(80px); opacity: 0.25; z-index: 0; animation: pulseGlow 6s infinite; }
+        .about-list { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .about-item { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: white; font-weight: 500; }
+        .about-item i { color: var(--accent); font-size: 1.4rem; background: rgba(127,42,255,0.15); padding: 5px; border-radius: 50%; }
+
+        /* SERVICES */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        
         .service-icon { 
             width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), #4c0bb3); border-radius: 16px;
             display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; margin-bottom: 1.8rem;
@@ -185,8 +171,6 @@
         }
         .glass-card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: white; }
         .glass-card p { color: var(--text-muted); font-size: 1rem; }
-        
-        /* Ferramentas */
         .tools-bar {
             margin-top: 5rem; padding: 2.5rem; background: rgba(20, 20, 25, 0.5); border: 1px solid var(--border-color);
             border-radius: 100px; display: flex; justify-content: center; flex-wrap: wrap; gap: 3.5rem; align-items: center;
@@ -196,7 +180,7 @@
         .tool i { font-size: 1.5rem; color: white; transition: 0.3s; }
         .tool:hover { color: white; } .tool:hover i { color: var(--accent); transform: scale(1.2); text-shadow: 0 0 15px var(--primary); }
 
-        /* --- 8. BENTO GRID --- */
+        /* BENTO GRID */
         .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; grid-auto-rows: 1fr; }
         .bento-item { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
         .bento-wide { grid-column: span 2; background: linear-gradient(145deg, rgba(127,42,255,0.05), rgba(20,20,25,0.4)); }
@@ -207,19 +191,18 @@
             filter: drop-shadow(0 0 10px rgba(127,42,255,0.4));
         }
 
-        /* --- 9. INCLUDED --- */
+        /* INCLUDED */
         .included-box { 
             background: linear-gradient(180deg, rgba(127,42,255,0.05) 0%, rgba(5,5,5,0.8) 100%); 
             border: 1px solid var(--border-color); border-radius: 30px; padding: 5rem; 
             position: relative; overflow: hidden; 
         }
         .included-box::before { content: ''; position: absolute; top: 0; left: 50%; width: 50%; height: 4px; background: var(--primary); filter: blur(20px); transform: translateX(-50%); }
-        
         .checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
         .check-item { display: flex; align-items: center; gap: 15px; color: white; font-weight: 600; font-size: 1.1rem; }
         .check-item i { color: var(--accent); font-size: 1.4rem; background: rgba(127,42,255,0.2); padding: 5px; border-radius: 50%; }
 
-        /* --- 10. PORTFOLIO CAROUSEL --- */
+        /* PORTFOLIO */
         .carousel-wrapper { position: relative; max-width: 1220px; margin: 0 auto; }
         .carousel-track-container { overflow: visible; padding: 2rem 0 4rem 0; }
         .carousel-track {
@@ -234,7 +217,6 @@
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
         }
         .portfolio-card:hover { transform: translateY(-15px) scale(1.02); border-color: var(--accent); box-shadow: 0 25px 60px -15px rgba(127, 42, 255, 0.2); }
-        
         .portfolio-media { height: 240px; width: 100%; background: #000; position: relative; overflow: hidden; }
         .portfolio-media img { width: 100%; height: 100%; object-fit: contain; background: linear-gradient(to bottom, #1a1a1a, #050505); transition: 0.6s; }
         .portfolio-card:hover img { transform: scale(1.05); }
@@ -257,12 +239,7 @@
             border: 1px solid var(--border-color); border-radius: 30px; text-align: center;
             position: relative; overflow: hidden;
         }
-        /* Luz de fundo do vídeo */
-        .video-showcase::after {
-            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
-            width: 60%; height: 50%; background: var(--primary); filter: blur(150px); opacity: 0.15;
-        }
-
+        .video-showcase::after { content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 60%; height: 50%; background: var(--primary); filter: blur(150px); opacity: 0.15; }
         .videos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 4rem; position: relative; z-index: 1; }
         .video-card { background: rgba(20, 20, 25, 0.8); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; transition: var(--transition); }
         .video-card:hover { border-color: var(--primary); box-shadow: 0 20px 50px rgba(127,42,255,0.15); transform: translateY(-8px); }
@@ -271,7 +248,23 @@
         .video-info { margin-top: 1.8rem; text-align: left; }
         .video-badge { display: inline-block; padding: 6px 14px; background: var(--primary); color: white; font-size: 0.8rem; border-radius: 20px; margin-bottom: 0.8rem; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(127,42,255,0.4); }
 
-        /* --- 11. DEPOIMENTOS --- */
+        /* --- 9. NOVO PROCESSO (CARDS) --- */
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; position: relative; z-index: 1; }
+        .process-card {
+            background: rgba(20, 20, 25, 0.6); border: 1px solid var(--border-color);
+            border-radius: 24px; padding: 3rem 2rem; position: relative; overflow: hidden;
+            transition: var(--transition); backdrop-filter: blur(10px);
+        }
+        .process-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 15px 40px rgba(127,42,255,0.15); }
+        .step-number {
+            font-size: 5rem; font-weight: 800; color: rgba(255,255,255,0.03);
+            position: absolute; top: 0px; right: 20px; line-height: 1; pointer-events: none;
+        }
+        .process-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; filter: drop-shadow(0 0 10px var(--primary)); }
+        .process-card h3 { font-size: 1.4rem; color: white; margin-bottom: 0.5rem; }
+        .process-card p { font-size: 0.95rem; color: var(--text-muted); }
+
+        /* DEPOIMENTOS */
         .testimonial-card {
             flex: 0 0 420px; scroll-snap-align: center;
             background: linear-gradient(145deg, rgba(30,30,35,0.9), rgba(10,10,12,0.9));
@@ -283,26 +276,13 @@
         .quote-icon { font-size: 2.5rem; color: var(--primary); opacity: 0.8; margin-bottom: 1.5rem; filter: drop-shadow(0 0 10px var(--primary)); }
         .stars { color: #FFC107; margin-bottom: 12px; font-size: 1.1rem; letter-spacing: 3px; filter: drop-shadow(0 0 5px #FFC107); }
 
-        /* --- 12. PROCESSO --- */
-        .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; position: relative; }
-        .step-card { text-align: center; padding: 2rem 1rem; position: relative; }
-        /* Linha decorativa */
-        .process-steps::before { content: ''; position: absolute; top: 20px; left: 5%; width: 90%; height: 2px; background: linear-gradient(to right, transparent, var(--border-color), transparent); z-index: 0; }
-        .step-card::before {
-            content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 40px; height: 40px; background: var(--card-bg); border: 2px solid var(--primary); border-radius: 50%;
-            z-index: 1; box-shadow: 0 0 15px rgba(127,42,255,0.4);
-        }
-        .step-title { font-size: 1.3rem; font-weight: 700; margin: 3.5rem 0 0.8rem; color: white; }
-
-        /* --- 13. CTA & FOOTER --- */
+        /* CTA & FOOTER */
         .cta-section {
             background: radial-gradient(circle at center, rgba(127,42,255,0.25) 0%, rgba(5,5,5,1) 80%);
             border: 1px solid var(--border-color); border-radius: 40px; text-align: center; padding: 8rem 2rem;
             position: relative; overflow: hidden;
         }
         .cta-section h2 { font-size: 3.5rem; }
-        
         footer { border-top: 1px solid var(--border-color); padding: 5rem 0 3rem; text-align: center; background: #020203; }
         .socials { display: flex; justify-content: center; gap: 1.5rem; margin: 3rem 0; flex-wrap: wrap; }
         .social-btn {
@@ -312,9 +292,7 @@
         }
         .social-btn:hover { background: var(--primary); border-color: var(--accent); transform: scale(1.1) rotate(10deg); box-shadow: 0 0 25px var(--primary); }
 
-        /* =========================================
-           RESPONSIVIDADE (MOBILE REFINADO)
-        ========================================= */
+        /* RESPONSIVIDADE */
         @media (max-width: 900px) {
             .section-padding { padding: 5rem 0; }
             .hero h1 { font-size: 3rem; }
@@ -324,42 +302,23 @@
             .bento-wide, .bento-full { grid-column: span 1; }
             .videos-grid { grid-template-columns: 1fr; }
             .video-info { text-align: center; }
-            .process-steps::before { display: none; } /* Remove linha no tablet/mobile */
         }
 
         @media (max-width: 768px) {
-            /* Header */
             .nav-links, .header-cta { display: none; } 
             .mobile-btn { display: block; }
-
-            /* Hero */
             .hero { padding-top: 140px; padding-bottom: 60px; }
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.1rem; }
-
-            /* Ícones Lado a Lado no Mobile (Pedido Específico) */
-            .tools-bar { 
-                flex-direction: row; 
-                flex-wrap: wrap; 
-                justify-content: center; 
-                gap: 1.5rem; 
-                border-radius: 24px; 
-                padding: 2rem 1rem;
-            }
+            .tools-bar { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 1.5rem; border-radius: 24px; padding: 1.5rem; }
             .tool { font-size: 0.9rem; }
-
-            /* Centralização e Ajustes */
             .section-header, .about-grid, .video-showcase { text-align: center; }
             .about-list { justify-content: center; text-align: center; grid-template-columns: 1fr; }
             .checklist { grid-template-columns: 1fr; text-align: center; justify-items: center; }
             .included-box { padding: 3rem 1.5rem; }
-            
-            /* Carrosséis Mobile */
-            .portfolio-card, .testimonial-card { flex: 0 0 88vw; } 
-            .nav-btn { display: none; } /* Navegação por toque */
+            .portfolio-card, .testimonial-card { flex: 0 0 85vw; } 
+            .nav-btn { display: none; }
             .carousel-track { padding: 0 20px; }
-            
-            /* Footer */
             .socials { gap: 1rem; }
             .cta-section { padding: 5rem 1.5rem; border-radius: 30px; } .cta-section h2 { font-size: 2.5rem; }
         }
@@ -381,7 +340,7 @@
                     <li><a href="#depoimentos">Depoimentos</a></li>
                 </ul>
                 <div class="header-cta">
-                    <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Orçamento</a>
+                    <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Solicitar Orçamento</a>
                 </div>
                 <i class="ph ph-list mobile-btn"></i>
             </nav>
@@ -390,18 +349,13 @@
 
     <section class="hero reveal">
         <div class="container">
-            <div class="hero-tag">
-                ✨ Feito para profissionais que empreendem com propósito!
-            </div>
-
+            <div class="hero-tag">✨ Feito para profissionais que empreendem com propósito!</div>
             <h1>Sites profissionais<br>que geram resultados.</h1>
             <p>Criação estratégica, moderna e totalmente personalizada para empresas, profissionais e agências.</p>
-            
             <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap;">
                 <a href="#processo" class="btn btn-primary">Iniciar processo</a>
                 <a href="#portfolio" class="btn btn-outline">Ver portfólio</a>
             </div>
-
             <div class="badges">
                 <div class="badge"><i class="ph ph-seal-check"></i> +3 anos de experiência</div>
                 <div class="badge"><i class="ph ph-trend-up"></i> Especialista em conversão</div>
@@ -414,7 +368,7 @@
         <div class="container about-grid">
             <div class="about-img-wrapper reveal">
                 <div class="about-glow"></div>
-                <img src="github.png" alt="Elizabeth" class="about-img">
+                <img src="github.png" alt="Elizabeth" class="about-img" loading="lazy">
             </div>
             <div class="reveal">
                 <h2>Prazer, eu sou a Elizabeth.</h2>
@@ -468,7 +422,6 @@
                     <p>Visibilidade no Google e conexão com WhatsApp, CRM e e-mail.</p>
                 </div>
             </div>
-            
             <div class="tools-bar reveal">
                 <span style="font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; color:var(--accent); font-weight:700;">Tecnologias:</span>
                 <div class="tool"><i class="ph ph-wordpress-logo"></i> WordPress</div>
@@ -484,7 +437,6 @@
         <div class="container">
             <div class="section-header reveal"><h2>Por que escolher a VOXO Estúdio?</h2></div>
             <div class="bento-grid">
-                
                 <div class="glass-card bento-item bento-wide reveal">
                     <div class="bento-icon"><i class="ph ph-pencil-circle"></i></div>
                     <h3>Design exclusivo</h3>
@@ -495,7 +447,6 @@
                     <h3>Processo rápido</h3>
                     <p>Transparência em cada etapa.</p>
                 </div>
-
                 <div class="glass-card bento-item reveal">
                     <div class="bento-icon"><i class="ph ph-device-mobile-camera"></i></div>
                     <h3>Responsividade total</h3>
@@ -506,13 +457,11 @@
                     <h3>Suporte + revisões + garantia</h3>
                     <p>Ajustes inclusos e 7 dias de manutenção para garantir estabilidade total.</p>
                 </div>
-
                 <div class="glass-card bento-item bento-full reveal">
                     <div class="bento-icon"><i class="ph ph-chat-circle-text"></i></div>
                     <h3>Comunicação direta e sem burocracia</h3>
                     <p>Fale diretamente com quem cria o seu projeto, garantindo agilidade e entendimento total das suas necessidades.</p>
                 </div>
-
             </div>
         </div>
     </section>
@@ -552,7 +501,6 @@
                 <button class="nav-btn prev-p" id="prev-portfolio"><i class="ph ph-caret-left"></i></button>
                 <div class="carousel-track-container">
                     <div class="carousel-track" id="track-portfolio">
-                        
                         <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-sandramendesprev.com_.br_-e1765384296454.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Previdenciária</h3></div></div>
                         <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Página de Vendas</h3></div></div>
                         <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-swater.us_-e1765561026146.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Limpeza Veicular</h3></div></div>
@@ -568,7 +516,6 @@
                         <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-pandaamarelo.com_.br_-e1765561049226.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Panda Amarelo</h3></div></div>
                         <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissilvavieira.com_.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Clínica Médica</h3></div></div>
                         <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-josueejuizes.com_.br_-e1765561075692.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Josué e Juízes</h3></div></div>
-
                     </div>
                 </div>
                 <button class="nav-btn next-p" id="next-portfolio"><i class="ph ph-caret-right"></i></button>
@@ -577,7 +524,6 @@
             <div class="video-showcase reveal">
                 <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">Projetos Premium em Destaque</h3>
                 <p style="color: var(--text-muted); font-size: 1.1rem;">Veja a fluidez e o design em movimento.</p>
-                
                 <div class="videos-grid">
                     <div class="video-card">
                         <div class="video-container">
@@ -613,12 +559,37 @@
     <section id="processo" class="section-padding">
         <div class="container">
             <div class="section-header reveal"><h2>Como funciona trabalhar com a VOXO</h2></div>
-            <div class="process-steps reveal">
-                <div class="step-card"><div class="step-title">Briefing</div><p style="font-size: 1rem; color: var(--text-muted);">Entendo seu negócio e objetivos.</p></div>
-                <div class="step-card"><div class="step-title">Design</div><p style="font-size: 1rem; color: var(--text-muted);">Criação do layout com foco em conversão.</p></div>
-                <div class="step-card"><div class="step-title">Dev</div><p style="font-size: 1rem; color: var(--text-muted);">Página rápida, leve e profissional.</p></div>
-                <div class="step-card"><div class="step-title">Testes</div><p style="font-size: 1rem; color: var(--text-muted);">Validação e entrega pronta para conversão.</p></div>
-                <div class="step-card"><div class="step-title">Manutenção</div><p style="font-size: 1rem; color: var(--text-muted);">7 dias de suporte pós-entrega.</p></div>
+            <div class="process-grid reveal">
+                <div class="process-card">
+                    <div class="step-number">01</div>
+                    <div class="process-icon"><i class="ph ph-chats-circle"></i></div>
+                    <h3>Alinhamento Estratégico</h3>
+                    <p>Entendo a fundo o seu negócio e objetivos para criar algo alinhado ao que você precisa.</p>
+                </div>
+                <div class="process-card">
+                    <div class="step-number">02</div>
+                    <div class="process-icon"><i class="ph ph-paint-brush-broad"></i></div>
+                    <h3>UI & UX Design</h3>
+                    <p>Criação do layout exclusivo com foco total em estética, experiência e conversão.</p>
+                </div>
+                <div class="process-card">
+                    <div class="step-number">03</div>
+                    <div class="process-icon"><i class="ph ph-code"></i></div>
+                    <h3>Desenvolvimento Clean</h3>
+                    <p>Transformo o layout em uma página rápida, leve e profissional.</p>
+                </div>
+                <div class="process-card">
+                    <div class="step-number">04</div>
+                    <div class="process-icon"><i class="ph ph-rocket-launch"></i></div>
+                    <h3>Otimização & Lançamento</h3>
+                    <p>Páginas testadas, ajustadas e entregues prontas para rodar anúncios.</p>
+                </div>
+                <div class="process-card">
+                    <div class="step-number">05</div>
+                    <div class="process-icon"><i class="ph ph-shield-check"></i></div>
+                    <h3>Suporte & Garantia</h3>
+                    <p>7 dias de suporte pós-entrega para garantir estabilidade total.</p>
+                </div>
             </div>
             <div style="text-align: center; margin-top: 5rem;" class="reveal"><a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Iniciar agora <i class="ph ph-arrow-right"></i></a></div>
         </div>
@@ -630,32 +601,26 @@
                 <h2>O que dizem meus clientes</h2>
                 <p>Experiências reais de quem confiou no meu trabalho</p>
             </div>
-            
             <div class="carousel-wrapper reveal">
                 <button class="nav-btn prev-p" id="prev-testim"><i class="ph ph-caret-left"></i></button>
                 <div class="carousel-track-container">
                     <div class="carousel-track" id="track-testim">
-                        
                         <div class="testimonial-card">
                             <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"O trabalho ficou excelente. A profissional foi rápida e caprichosa. Entendeu toda a solicitação feita. Recomendo."</p></div>
                             <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Sandra Mendes</strong><span style="font-size: 0.9rem; color: var(--accent);">LP Previdenciária</span><div class="date">Dez 2025</div></div>
                         </div>
-
                         <div class="testimonial-card">
                             <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"O trabalho na criação da página de vendas ficou excelente! Profissional, organizado e com um visual muito atrativo. Superou minhas expectativas."</p></div>
                             <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Felipe</strong><span style="font-size: 0.9rem; color: var(--accent);">Página de Vendas</span><div class="date">Nov 2025</div></div>
                         </div>
-
                         <div class="testimonial-card">
                             <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text" style="opacity: 0.7;">(Avaliação 5 estrelas sem comentário por escrito.)</p></div>
                             <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Jucemar G</strong><span style="font-size: 0.9rem; color: var(--accent);">Site Institucional</span><div class="date">Out-Nov 2025</div></div>
                         </div>
-
                         <div class="testimonial-card">
                             <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"Muito profissional, superou as expectativas. Caso precise voltarei a trabalhar novamente."</p></div>
                             <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Isael</strong><span style="font-size: 0.9rem; color: var(--accent);">Limpeza Veicular</span><div class="date">Nov 2025</div></div>
                         </div>
-
                     </div>
                 </div>
                 <button class="nav-btn next-p" id="next-testim"><i class="ph ph-caret-right"></i></button>
@@ -703,7 +668,7 @@
             }
         });
 
-        // SCROLL REVEAL ANIMATION (Ativa a classe .reveal.active ao rolar)
+        // SCROLL REVEAL ANIMATION
         const revealElements = document.querySelectorAll('.reveal');
         const revealOnScroll = () => {
             for (let i = 0; i < revealElements.length; i++) {
@@ -716,9 +681,9 @@
             }
         }
         window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // Trigger inicial
+        revealOnScroll(); 
 
-        // CARROSSEL FUNÇÃO (Genérica para Portfolio e Depoimentos)
+        // CARROSSEL FUNÇÃO
         function initCarousel(trackId, prevBtnId, nextBtnId, scrollAmount) {
             const track = document.getElementById(trackId);
             const prevBtn = document.getElementById(prevBtnId);
