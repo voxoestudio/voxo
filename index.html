@@ -2,7 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <meta name="description" content="VOXO Estúdio - Sites profissionais que geram resultados. Web Design Estratégico.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VOXO Estúdio - Sites profissionais que geram resultados. Web Design Estratégico.">
     <title>VOXO Estúdio | Web Design Estratégico</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,9 +40,9 @@
         h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
-        img { display: block; max-width: 100%; height: auto; margin: 0 auto; /* Centraliza imagens por padrão */ }
+        img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
 
-        /* Container Centralizado */
+        /* Container */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -84,7 +85,7 @@
             border-color: var(--accent); background: rgba(108,19,226, 0.1);
         }
 
-        /* Glass Card */
+        /* Glass Card Genérico */
         .glass-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -92,6 +93,9 @@
             border-radius: 20px; padding: 2.5rem;
             position: relative; overflow: hidden;
             transition: var(--transition);
+            /* Garante que o conteúdo interno preencha a altura se necessário */
+            display: flex; flex-direction: column; justify-content: center;
+            height: 100%; 
         }
         .glass-card:hover { border-color: var(--primary); transform: translateY(-5px); }
 
@@ -103,11 +107,9 @@
         nav { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 1.5rem; font-weight: 800; color: white; letter-spacing: 1px; }
         .logo span { color: var(--accent); }
-        
         .nav-links { display: flex; gap: 2rem; }
         .nav-links a { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; }
         .nav-links a:hover { color: white; }
-        
         .header-cta { display: inline-flex; }
         .mobile-btn { display: none; font-size: 1.8rem; cursor: pointer; color: white; }
 
@@ -119,7 +121,6 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; }
-        
         .badges { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); }
         .badge { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 0.9rem; }
         .badge i { color: var(--accent); }
@@ -129,7 +130,6 @@
         .about-img-wrapper { position: relative; width: 100%; display: flex; justify-content: center; }
         .about-img { border-radius: 20px; width: 100%; max-width: 500px; box-shadow: 0 0 0 1px var(--border-color), 0 20px 50px rgba(0,0,0,0.5); position: relative; z-index: 1; }
         .about-glow { position: absolute; width: 100%; height: 100%; top: 10px; left: 0; background: var(--primary); filter: blur(60px); opacity: 0.3; z-index: 0; border-radius: 20px; }
-        
         .about-list { margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .about-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; color: var(--text-muted); }
         .about-item i { color: var(--primary); font-size: 1.2rem; }
@@ -142,25 +142,49 @@
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
-        
         .service-icon { 
             width: 50px; height: 50px; background: rgba(108,19,226,0.1); border-radius: 12px;
             display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent); margin-bottom: 1.5rem;
         }
         .glass-card h3 { font-size: 1.3rem; margin-bottom: 0.8rem; color: white; }
         
-        /* Barra de Ferramentas */
         .tools-bar {
             margin-top: 4rem; padding: 2rem; background: var(--card-bg); border: 1px solid var(--border-color);
             border-radius: 100px; display: flex; justify-content: center; flex-wrap: wrap; gap: 3rem; align-items: center;
         }
         .tool { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--text-muted); }
 
-        /* --- 8. BENTO GRID --- */
-        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .bento-item { padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
-        .bento-wide { grid-column: span 2; background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(108,19,226,0.05)); }
+        /* --- 8. BENTO GRID (CORRIGIDO E MELHORADO) --- */
+        .bento-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 1.5rem; 
+            /* Isso garante que as linhas tenham altura igual */
+            grid-auto-rows: 1fr; 
+        }
         
+        /* Itens do Bento */
+        .bento-wide { grid-column: span 2; }
+        .bento-full { grid-column: span 3; } /* Novo: ocupa linha inteira */
+
+        /* Ajuste específico para os cards dentro do Bento ficarem alinhados */
+        .bento-grid .glass-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Alinha tudo ao topo */
+            height: 100%;
+        }
+        
+        .bento-icon {
+            font-size: 2.2rem; 
+            color: var(--accent); 
+            margin-bottom: 1.2rem;
+            background: rgba(108,19,226,0.1);
+            width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 14px;
+        }
+
         /* --- 9. INCLUDED --- */
         .included-box { background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0) 100%); border: 1px solid var(--border-color); border-radius: 24px; padding: 4rem; }
         .checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
@@ -175,7 +199,6 @@
             scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab;
         }
         .carousel-track::-webkit-scrollbar { display: none; }
-        
         .portfolio-card {
             flex: 0 0 380px; scroll-snap-align: center;
             border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); background: var(--card-bg); transition: var(--transition);
@@ -183,7 +206,6 @@
         .portfolio-media { height: 220px; width: 100%; background: #000; position: relative; }
         .portfolio-media img { width: 100%; height: 100%; object-fit: contain; background: linear-gradient(to bottom, #1a1a1a, #050505); }
         .portfolio-info { padding: 1.2rem; background: #0a0a0a; border-top: 1px solid var(--border-color); }
-
         .nav-btn {
             position: absolute; top: 40%; transform: translateY(-50%);
             width: 45px; height: 45px; border-radius: 50%;
@@ -241,48 +263,28 @@
         @media (max-width: 900px) {
             .section-padding { padding: 4rem 0; }
             .hero h1 { font-size: 3rem; }
-            .about-grid { grid-template-columns: 1fr; text-align: center; } /* Centraliza Sobre */
-            .about-list { text-align: left; } /* Lista mantém alinhamento interno */
+            .about-grid { grid-template-columns: 1fr; text-align: center; } 
+            .about-list { text-align: left; }
             .bento-grid { grid-template-columns: 1fr; }
-            .bento-wide { grid-column: span 1; }
+            .bento-wide, .bento-full { grid-column: span 1; } /* Remove spans no tablet */
             .videos-grid { grid-template-columns: 1fr; }
-            .video-info { text-align: center; } /* Centraliza Info Vídeo */
+            .video-info { text-align: center; }
         }
 
         @media (max-width: 768px) {
-            /* Header */
             .nav-links, .header-cta { display: none; } 
             .mobile-btn { display: block; }
-
-            /* Hero */
             .hero { padding-top: 140px; padding-bottom: 60px; }
             .hero h1 { font-size: 2.5rem; }
             .hero p { font-size: 1.1rem; }
-
-            /* Ícones Lado a Lado no Mobile */
-            .tools-bar { 
-                flex-direction: row; 
-                flex-wrap: wrap; 
-                justify-content: center; /* Centraliza */
-                gap: 1.5rem; 
-                border-radius: 24px; 
-                padding: 1.5rem;
-            }
-            .tool { font-size: 0.9rem; } /* Ajuste fonte */
-
-            /* Alinhamentos Centrais */
+            .tools-bar { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 1.5rem; border-radius: 24px; padding: 1.5rem; }
+            .tool { font-size: 0.9rem; }
             .section-header, .about-grid, .video-showcase { text-align: center; }
-            .about-list { justify-content: center; } /* Centraliza lista */
-            
-            /* Ajustes de Grade */
+            .about-list { justify-content: center; }
             .checklist { grid-template-columns: 1fr; text-align: center; justify-items: center; }
             .included-box { padding: 2rem 1.5rem; }
-            
-            /* Carrosséis Mobile */
             .portfolio-card, .testimonial-card { flex: 0 0 85vw; } 
             .nav-btn { display: none; }
-            
-            /* Footer */
             .socials { gap: 1rem; }
         }
     </style>
@@ -406,31 +408,35 @@
         <div class="container">
             <div class="section-header"><h2>Por que escolher a VOXO Estúdio?</h2></div>
             <div class="bento-grid">
+                
                 <div class="glass-card bento-item bento-wide">
-                    <i class="ph ph-pencil-circle" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                    <div class="bento-icon"><i class="ph ph-pencil-circle"></i></div>
                     <h3>Design exclusivo</h3>
-                    <p style="color: var(--text-muted);">Nada de modelos prontos — cada projeto é único para transmitir a identidade da sua marca.</p>
+                    <p>Nada de modelos prontos — cada projeto é único para transmitir a identidade da sua marca.</p>
                 </div>
                 <div class="glass-card bento-item">
-                    <i class="ph ph-lightning" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                    <div class="bento-icon"><i class="ph ph-lightning"></i></div>
                     <h3>Processo rápido</h3>
-                    <p style="color: var(--text-muted);">Transparência em cada etapa.</p>
+                    <p>Transparência em cada etapa.</p>
                 </div>
+
                 <div class="glass-card bento-item">
-                    <i class="ph ph-device-mobile-camera" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                    <div class="bento-icon"><i class="ph ph-device-mobile-camera"></i></div>
                     <h3>Responsividade total</h3>
-                    <p style="color: var(--text-muted);">Perfeito no celular e PC.</p>
+                    <p>Perfeito no celular e PC.</p>
                 </div>
                 <div class="glass-card bento-item bento-wide">
-                    <i class="ph ph-headset" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                    <div class="bento-icon"><i class="ph ph-headset"></i></div>
                     <h3>Suporte + revisões + garantia</h3>
-                    <p style="color: var(--text-muted);">Ajustes inclusos e 7 dias de manutenção para garantir estabilidade total.</p>
+                    <p>Ajustes inclusos e 7 dias de manutenção para garantir estabilidade total.</p>
                 </div>
-                <div class="glass-card bento-item">
-                    <i class="ph ph-chat-circle-text" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
-                    <h3>Comunicação direta</h3>
-                    <p style="color: var(--text-muted);">Sem burocracia.</p>
+
+                <div class="glass-card bento-item bento-full">
+                    <div class="bento-icon"><i class="ph ph-chat-circle-text"></i></div>
+                    <h3>Comunicação direta e sem burocracia</h3>
+                    <p>Fale diretamente com quem cria o seu projeto, garantindo agilidade e entendimento total das suas necessidades.</p>
                 </div>
+
             </div>
         </div>
     </section>
