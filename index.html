@@ -1,466 +1,560 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PFN8PCJK');</script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="VOXO Estúdio - Criação de Landing Pages de alta conversão e sites estratégicos para quem empreende com propósito.">
+    <meta name="author" content="Elizabeth - VOXO Estúdio">
+    <meta name="theme-color" content="#6C13E2">
     <title>VOXO Estúdio | Web Design Estratégico</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
-        /* --- 1. CONFIGURAÇÕES GERAIS --- */
+        /* --- 1. CORE & PALETA DE CORES --- */
         :root {
-            --bg-color: #030305;          
-            --card-bg: rgba(20, 20, 25, 0.6); 
-            --border-color: rgba(255, 255, 255, 0.08);
+            --bg: #000000;          /* 5 - Preto Absoluto */
+            --surface: #17002A;     /* 4 - Roxo Escuro (Fundo de cards) */
+            --primary: #6C13E2;     /* 3 - Roxo Vibrante (Botões, Glows) */
+            --accent: #C092FF;      /* 2 - Roxo Claro (Detalhes, Ícones) */
+            --text: #FAFAFA;        /* 1 - Quase Branco (Texto Principal) */
             
-            --primary: #7F2AFF; 
-            --accent: #C092FF;            
-            --text-main: #FFFFFF;
-            --text-muted: #9CA3AF;        
-            
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --text-muted: #B0B0B0;
+            --cursor-size: 20px;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
 
-        html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+        /* BLINDAGEM CONTRA ROLAGEM HORIZONTAL */
+        html, body {
+            width: 100%; max-width: 100%;
+            overflow-x: hidden; 
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
             line-height: 1.6;
-            background-image: radial-gradient(circle at 50% 0%, rgba(127, 42, 255, 0.1) 0%, transparent 50%);
+            scroll-behavior: smooth;
         }
 
-        h1, h2, h3, h4 { font-family: 'Outfit', sans-serif; letter-spacing: -0.02em; }
+        h1, h2, h3, h4 { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--text); line-height: 1.1; }
         a { text-decoration: none; color: inherit; transition: var(--transition); }
+        img { display: block; max-width: 100%; height: auto; margin: 0 auto; pointer-events: none; }
         ul { list-style: none; }
-        img { display: block; max-width: 100%; height: auto; margin: 0 auto; }
 
-        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+        /* CONTAINER */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; width: 100%; }
         .section-padding { padding: 8rem 0; }
 
-        /* --- 2. ANIMAÇÕES --- */
-        @keyframes pulseGlow { 0% { opacity: 0.15; transform: translateX(-50%) scale(1); } 100% { opacity: 0.3; transform: translateX(-50%) scale(1.1); } }
-        @keyframes beamMove { 0% { transform: translateX(-50%) rotate(0deg); opacity: 0.2; } 50% { opacity: 0.4; } 100% { transform: translateX(-50%) rotate(5deg); opacity: 0.2; } }
-        @keyframes float { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
-        @keyframes shineText { to { background-position: 200% center; } }
-
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        .ambient-light {
-            position: fixed; top: -30%; left: 50%; transform: translateX(-50%);
-            width: 80%; height: 800px; 
-            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-            filter: blur(180px); opacity: 0.2; z-index: 0; pointer-events: none;
-            animation: pulseGlow 8s infinite alternate;
-        }
-        .beam {
-            position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
-            width: 2px; height: 120vh; 
-            background: linear-gradient(to bottom, transparent, var(--primary), transparent);
-            opacity: 0.3; z-index: 0; filter: blur(2px);
-            animation: beamMove 10s infinite alternate;
+        /* --- 2. TEXTURA E GLOWS (SOMBRAS ROXAS) --- */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9999; mix-blend-mode: overlay;
         }
 
-        /* --- 3. UI COMPONENTS --- */
-        .glass-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(12px); border-radius: 24px; padding: 2.5rem;
-            position: relative; overflow: hidden; transition: var(--transition);
-            display: flex; flex-direction: column; justify-content: center; height: 100%;
+        .ambient-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(108, 19, 226, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 60%, rgba(23, 0, 42, 0.8), transparent 50%),
+                radial-gradient(circle at 50% 120%, rgba(192, 146, 255, 0.1), transparent 50%);
         }
-        .glass-card::before {
-            content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 2px;
-            background: linear-gradient(135deg, transparent, var(--primary), var(--accent), transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor; mask-composite: exclude;
-            opacity: 0; transition: opacity 0.5s ease; pointer-events: none;
-        }
-        .glass-card:hover { transform: translateY(-10px); box-shadow: 0 20px 50px -10px rgba(0,0,0,0.5); border-color: transparent; }
-        .glass-card:hover::before { opacity: 1; }
 
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.25; z-index: 0;
+            animation: floatOrb 20s infinite ease-in-out; pointer-events: none;
+        }
+        .orb-1 { top: -10%; left: -10%; width: 600px; height: 600px; background: var(--primary); }
+        .orb-2 { bottom: 20%; right: -5%; width: 500px; height: 500px; background: var(--accent); opacity: 0.15; animation-delay: -5s; }
+        
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* --- 3. CURSOR --- */
+        .cursor {
+            position: fixed; width: var(--cursor-size); height: var(--cursor-size);
+            border: 1px solid var(--accent); border-radius: 50%; pointer-events: none;
+            transform: translate(-50%, -50%); transition: transform 0.1s, background 0.3s; z-index: 10000;
+            mix-blend-mode: difference;
+        }
+        .cursor.hovered { transform: translate(-50%, -50%) scale(3); background: var(--accent); border-color: transparent; mix-blend-mode: normal; opacity: 0.3; }
+        @media (pointer: coarse) { .cursor { display: none; } * { cursor: auto; } }
+
+        /* --- 4. COMPONENTES UI --- */
         .btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 16px 36px; border-radius: 100px; font-weight: 600; font-size: 1rem; 
-            cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; z-index: 1;
+            padding: 16px 36px; border-radius: 0; 
+            font-weight: 700; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer; transition: var(--transition); 
+            border: 1px solid rgba(192, 146, 255, 0.3);
+            position: relative; overflow: hidden; background: transparent; color: var(--text);
+            white-space: nowrap;
         }
-        .btn-primary {
-            background: var(--primary); color: white; border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px -10px rgba(127, 42, 255, 0.5);
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--text); transition: 0.4s; z-index: -1;
         }
-        .btn-primary::after {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: 0.6s; z-index: -1;
-        }
-        .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(127, 42, 255, 0.7); }
-        .btn-primary:hover::after { left: 100%; }
+        .btn:hover { color: black; border-color: var(--text); }
+        .btn:hover::before { width: 100%; }
 
-        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: white; }
-        .btn-outline:hover { border-color: var(--accent); background: rgba(127, 42, 255, 0.1); }
+        .btn-primary { background: var(--primary); color: white; border: 1px solid var(--primary); }
+        .btn-primary:hover { background: transparent; color: white; border-color: var(--primary); }
+        .btn-primary:hover::before { width: 0%; }
 
-        /* --- 4. HEADER --- */
+        .card-premium {
+            background: rgba(23, 0, 42, 0.6); /* #17002A com transparencia */
+            border: 1px solid rgba(192, 146, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem; transition: var(--transition); position: relative; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: center; height: 100%;
+        }
+        .card-premium:hover { background: rgba(23, 0, 42, 0.9); border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(108, 19, 226, 0.3); }
+
+        .section-title { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 3rem; text-align: center; }
+
+        /* --- 5. HEADER --- */
         header {
-            position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 0;
-            background: rgba(3, 3, 5, 0.85); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.5rem 0;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.6rem; font-weight: 800; color: white; letter-spacing: 1px; }
-        .logo span { color: var(--accent); }
+        .logo { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; letter-spacing: -1px; }
         .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { font-size: 0.95rem; color: var(--text-muted); font-weight: 500; position: relative; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent); transition: 0.3s; }
-        .nav-links a:hover { color: white; } .nav-links a:hover::after { width: 100%; }
-        .header-cta { display: inline-flex; }
-        .mobile-btn { display: none; font-size: 1.8rem; cursor: pointer; color: white; }
-
-        /* --- 5. HERO SECTION --- */
-        .hero { padding-top: 180px; padding-bottom: 120px; text-align: center; position: relative; }
-        .hero-tag {
-            display: inline-block; padding: 10px 24px; border-radius: 50px;
-            background: rgba(127, 42, 255, 0.15); border: 1px solid rgba(127, 42, 255, 0.3);
-            color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 2.5rem;
-            animation: float 4s ease-in-out infinite alternate;
-        }
-        .hero h1 {
-            font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800;
-            background: linear-gradient(to right, #FFFFFF 20%, #b3b3b3 50%, var(--accent) 80%);
-            background-size: 200% auto; animation: shineText 6s linear infinite;
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 3rem; }
-        .badges { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
-        .badge { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.95rem; }
-        .badge i { color: var(--accent); font-size: 1.2rem; filter: drop-shadow(0 0 5px var(--primary)); }
-
-        /* --- 6. SEÇÕES INTERNAS --- */
-        .section-header { text-align: center; margin-bottom: 5rem; max-width: 800px; margin-inline: auto; }
-        .section-header h2 {
-            font-size: 3rem; margin-bottom: 1rem;
-            background: linear-gradient(to bottom, #fff 40%, #888 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        /* ABOUT */
-        .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: center; }
-        .about-img-wrapper { position: relative; width: 100%; display: flex; justify-content: center; transition: var(--transition); }
-        .about-img-wrapper:hover { transform: scale(1.02); }
-        .about-img { border-radius: 24px; width: 100%; max-width: 500px; box-shadow: 0 0 0 1px var(--border-color), 0 30px 60px rgba(0,0,0,0.6); position: relative; z-index: 1; }
-        .about-glow { position: absolute; width: 120%; height: 120%; top: -10%; left: -10%; background: var(--primary); filter: blur(80px); opacity: 0.25; z-index: 0; animation: pulseGlow 6s infinite; }
-        .about-list { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .about-item { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: white; font-weight: 500; }
-        .about-item i { color: var(--accent); font-size: 1.4rem; background: rgba(127,42,255,0.15); padding: 5px; border-radius: 50%; }
-
-        /* SERVICES */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-        .service-icon { 
-            width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), #4c0bb3); border-radius: 16px;
-            display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; margin-bottom: 1.8rem;
-            box-shadow: 0 10px 25px rgba(127,42,255,0.3);
-        }
-        .glass-card h3 { font-size: 1.4rem; margin-bottom: 1rem; color: white; }
-        .glass-card p { color: var(--text-muted); font-size: 1rem; }
-        .tools-bar {
-            margin-top: 5rem; padding: 2.5rem; background: rgba(20, 20, 25, 0.5); border: 1px solid var(--border-color);
-            border-radius: 100px; display: flex; justify-content: center; flex-wrap: wrap; gap: 3.5rem; align-items: center;
-            backdrop-filter: blur(10px);
-        }
-        .tool { display: flex; align-items: center; gap: 12px; font-weight: 600; color: var(--text-muted); transition: 0.3s; }
-        .tool i { font-size: 1.5rem; color: white; transition: 0.3s; }
-        .tool:hover { color: white; } .tool:hover i { color: var(--accent); transform: scale(1.2); text-shadow: 0 0 15px var(--primary); }
-
-        /* BENTO GRID */
-        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; grid-auto-rows: 1fr; }
-        .bento-item { padding: 2.5rem; display: flex; flex-direction: column; justify-content: center; }
-        .bento-wide { grid-column: span 2; background: linear-gradient(145deg, rgba(127,42,255,0.05), rgba(20,20,25,0.4)); }
-        .bento-full { grid-column: span 3; }
-        .bento-grid .glass-card { justify-content: flex-start; }
-        .bento-icon {
-            font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 10px rgba(127,42,255,0.4));
-        }
-
-        /* INCLUDED */
-        .included-box { 
-            background: linear-gradient(180deg, rgba(127,42,255,0.05) 0%, rgba(5,5,5,0.8) 100%); 
-            border: 1px solid var(--border-color); border-radius: 30px; padding: 5rem; 
-            position: relative; overflow: hidden; 
-        }
-        .included-box::before { content: ''; position: absolute; top: 0; left: 50%; width: 50%; height: 4px; background: var(--primary); filter: blur(20px); transform: translateX(-50%); }
-        .checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
-        .check-item { display: flex; align-items: center; gap: 15px; color: white; font-weight: 600; font-size: 1.1rem; }
-        .check-item i { color: var(--accent); font-size: 1.4rem; background: rgba(127,42,255,0.2); padding: 5px; border-radius: 50%; }
-
-        /* PORTFOLIO */
-        .carousel-wrapper { position: relative; max-width: 1220px; margin: 0 auto; }
-        .carousel-track-container { overflow: visible; padding: 2rem 0 4rem 0; }
-        .carousel-track {
-            display: flex; gap: 2.5rem; overflow-x: auto;
-            scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; padding: 0 10px;
-        }
-        .carousel-track::-webkit-scrollbar { display: none; }
+        .nav-links a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; }
+        .nav-links a:hover { color: var(--accent); }
         
-        .portfolio-card {
-            flex: 0 0 400px; scroll-snap-align: center;
-            border-radius: 20px; overflow: hidden; border: 1px solid var(--border-color); background: var(--card-bg); transition: var(--transition);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3);
-        }
-        .portfolio-card:hover { transform: translateY(-15px) scale(1.02); border-color: var(--accent); box-shadow: 0 25px 60px -15px rgba(127, 42, 255, 0.2); }
-        .portfolio-media { height: 240px; width: 100%; background: #000; position: relative; overflow: hidden; }
-        .portfolio-media img { width: 100%; height: 100%; object-fit: contain; background: linear-gradient(to bottom, #1a1a1a, #050505); transition: 0.6s; }
-        .portfolio-card:hover img { transform: scale(1.05); }
-        .portfolio-info { padding: 1.5rem; background: #0a0a0a; border-top: 1px solid var(--border-color); position: relative; z-index: 2; }
+        .mobile-btn { display: none; font-size: 2rem; color: var(--text); z-index: 101; cursor: pointer; position: relative; }
 
+        /* --- 6. HERO SECTION --- */
+        .hero { padding-top: 180px; padding-bottom: 80px; display: flex; align-items: center; min-height: 90vh; }
+        .hero-content { max-width: 1000px; width: 100%; text-align: left; }
+        
+        .hero-tag {
+            display: inline-block; padding: 8px 20px; border: 1px solid var(--primary);
+            color: var(--accent); font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.9rem; 
+            margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 1px;
+            background: rgba(108, 19, 226, 0.1);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5.5rem); margin-bottom: 1.5rem;
+            background: linear-gradient(180deg, #FAFAFA, #C092FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--text-muted); max-width: 700px; margin-bottom: 3rem; font-weight: 300; }
+        
+        .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-start; }
+
+        .hero-stats { 
+            display: flex; gap: 3rem; margin-top: 4rem; padding-top: 2rem; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            justify-content: flex-start; 
+        }
+        .stat-number { display: block; font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+
+        /* --- 7. MARQUEE --- */
+        .marquee-wrapper { width: 100%; overflow: hidden; position: relative; padding: 3rem 0; }
+        .marquee { 
+            background: var(--primary); padding: 1rem 0; white-space: nowrap; 
+            position: relative; z-index: 2; transform: rotate(-1deg) scale(1.05); 
+            width: 110%; margin-left: -5%;
+            border-top: 1px solid white; border-bottom: 1px solid white; 
+        }
+        .marquee-content { display: inline-block; animation: marquee 30s linear infinite; }
+        .marquee span { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: black; margin-right: 4rem; text-transform: uppercase; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- 8. ABOUT --- */
+        .about-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .about-text h2 { font-size: 3rem; margin-bottom: 1.5rem; color: var(--accent); }
+        .about-text p { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.7; }
+        .about-image { position: relative; }
+        .about-image img { width: 100%; border-radius: 12px; filter: grayscale(100%); transition: 0.5s; object-fit: cover; aspect-ratio: 4/5; }
+        .about-image:hover img { filter: grayscale(0%); }
+        .about-image::after { content: ''; position: absolute; top: 20px; right: -20px; width: 100%; height: 100%; border: 1px solid var(--primary); z-index: -1; }
+        .about-check { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+        .check-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 0.9rem; }
+        .check-item i { color: var(--primary); }
+
+        /* --- 9. SERVICES --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .service-card {
+            background: rgba(23, 0, 42, 0.6); border: 1px solid rgba(192, 146, 255, 0.1); padding: 3rem 2rem;
+            transition: var(--transition); position: relative;
+        }
+        .service-card:hover { border-color: var(--primary); background: rgba(23, 0, 42, 0.9); }
+        .service-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .service-card p { color: var(--text-muted); font-size: 1rem; }
+        
+        .tools-bar { margin-top: 4rem; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; background: rgba(23,0,42,0.3); }
+        .tool-icon { font-size: 2rem; color: var(--text-muted); transition: 0.3s; }
+        .tool-icon:hover { color: var(--accent); transform: scale(1.1); }
+
+        /* --- 10. PORTFOLIO CAROUSEL --- */
+        .carousel-wrapper { position: relative; max-width: 1280px; margin: 0 auto; overflow: hidden; width: 100%; }
+        
+        .carousel-track-container { 
+            overflow-x: auto; padding-bottom: 2rem; scrollbar-width: none; 
+            cursor: grab; scroll-behavior: smooth;
+        }
+        .carousel-track-container::-webkit-scrollbar { display: none; }
+        .carousel-track-container:active { cursor: grabbing; }
+        .carousel-track { display: flex; gap: 2rem; width: max-content; padding: 0 24px; }
+        
+        .portfolio-item { 
+            width: 400px; flex-shrink: 0; background: rgba(23, 0, 42, 0.6);
+            border: 1px solid rgba(192, 146, 255, 0.1); transition: var(--transition);
+        }
+        .portfolio-item:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 10px 40px -10px rgba(108, 19, 226, 0.2); }
+        .portfolio-media { height: 240px; overflow: hidden; position: relative; background: #000; }
+        .portfolio-media img { width: 100%; height: 100%; object-fit: contain; transition: 0.6s; }
+        .portfolio-item:hover .portfolio-media img { transform: scale(1.05); }
+        .portfolio-info { padding: 1.5rem; }
+        .portfolio-info h3 { font-size: 1.4rem; margin-bottom: 0.8rem; font-family: 'Syne', sans-serif; color: var(--text); }
+        .visit-link { 
+            display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; 
+            border: 1px solid rgba(255,255,255,0.2); font-size: 0.85rem; text-transform: uppercase; 
+            letter-spacing: 1px; color: white; font-weight: 600; transition: 0.3s;
+        }
+        .visit-link:hover { background: var(--primary); color: white; border-color: var(--primary); }
         .nav-btn {
             position: absolute; top: 40%; transform: translateY(-50%);
             width: 50px; height: 50px; border-radius: 50%;
-            background: rgba(10, 10, 10, 0.7); border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.2);
             color: white; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 10; transition: 0.3s; backdrop-filter: blur(5px);
+            cursor: pointer; z-index: 10; transition: 0.3s;
         }
-        .nav-btn:hover { background: var(--primary); border-color: var(--accent); transform: scale(1.1); box-shadow: 0 0 20px var(--primary); }
-        .prev-p { left: -25px; } .next-p { right: -25px; }
+        .nav-btn:hover { background: var(--primary); border-color: var(--primary); }
+        .prev-p { left: 10px; } .next-p { right: 10px; }
 
-        /* VÍDEOS DESTAQUE */
-        .video-showcase {
-            margin-top: 6rem; padding: 4rem;
-            background: linear-gradient(180deg, rgba(127,42,255,0.05), rgba(0,0,0,0));
-            border: 1px solid var(--border-color); border-radius: 30px; text-align: center;
-            position: relative; overflow: hidden;
-        }
-        .video-showcase::after { content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%); width: 60%; height: 50%; background: var(--primary); filter: blur(150px); opacity: 0.15; }
-        .videos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 4rem; position: relative; z-index: 1; }
-        .video-card { background: rgba(20, 20, 25, 0.8); border: 1px solid var(--border-color); border-radius: 20px; padding: 1.5rem; transition: var(--transition); }
-        .video-card:hover { border-color: var(--primary); box-shadow: 0 20px 50px rgba(127,42,255,0.15); transform: translateY(-8px); }
-        .video-container { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); aspect-ratio: 16/10; }
-        .video-container video { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .video-info { margin-top: 1.8rem; text-align: left; }
-        .video-badge { display: inline-block; padding: 6px 14px; background: var(--primary); color: white; font-size: 0.8rem; border-radius: 20px; margin-bottom: 0.8rem; font-weight: 700; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(127,42,255,0.4); }
+        /* --- 11. VIDEOS --- */
+        .videos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .video-wrapper { position: relative; border: 1px solid rgba(192, 146, 255, 0.1); padding: 10px; background: rgba(23,0,42,0.6); }
+        .video-container { aspect-ratio: 16/9; background: #000; overflow: hidden; }
+        .video-container video { width: 100%; height: 100%; object-fit: cover; }
+        .video-caption { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+        .video-title { font-size: 1.2rem; font-weight: 700; font-family: 'Syne', sans-serif; color: var(--text); }
+        .video-tag { font-size: 0.8rem; border: 1px solid var(--accent); color: var(--accent); padding: 4px 10px; text-transform: uppercase; }
 
-        /* --- 9. NOVO PROCESSO (CARDS) --- */
-        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; position: relative; z-index: 1; }
-        .process-card {
-            background: rgba(20, 20, 25, 0.6); border: 1px solid var(--border-color);
-            border-radius: 24px; padding: 3rem 2rem; position: relative; overflow: hidden;
-            transition: var(--transition); backdrop-filter: blur(10px);
-        }
-        .process-card:hover { transform: translateY(-10px); border-color: var(--accent); box-shadow: 0 15px 40px rgba(127,42,255,0.15); }
-        .step-number {
-            font-size: 5rem; font-weight: 800; color: rgba(255,255,255,0.03);
-            position: absolute; top: 0px; right: 20px; line-height: 1; pointer-events: none;
-        }
-        .process-icon { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; filter: drop-shadow(0 0 10px var(--primary)); }
-        .process-card h3 { font-size: 1.4rem; color: white; margin-bottom: 0.5rem; }
-        .process-card p { font-size: 0.95rem; color: var(--text-muted); }
+        /* --- 12. DIFERENCIAIS --- */
+        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .bento-item { padding: 2.5rem; border: 1px solid rgba(192, 146, 255, 0.1); background: rgba(23, 0, 42, 0.6); transition: 0.3s; }
+        .bento-item:hover { border-color: var(--primary); background: rgba(23, 0, 42, 0.9); }
+        .bento-wide { grid-column: span 2; }
+        .bento-icon { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+        .bento-item h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .bento-item p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* DEPOIMENTOS */
-        .testimonial-card {
-            flex: 0 0 420px; scroll-snap-align: center;
-            background: linear-gradient(145deg, rgba(30,30,35,0.9), rgba(10,10,12,0.9));
-            border: 1px solid var(--border-color); padding: 3rem; border-radius: 24px;
-            display: flex; flex-direction: column; justify-content: space-between;
-            transition: var(--transition); position: relative;
-        }
-        .testimonial-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
-        .quote-icon { font-size: 2.5rem; color: var(--primary); opacity: 0.8; margin-bottom: 1.5rem; filter: drop-shadow(0 0 10px var(--primary)); }
-        .stars { color: #FFC107; margin-bottom: 12px; font-size: 1.1rem; letter-spacing: 3px; filter: drop-shadow(0 0 5px #FFC107); }
+        /* --- 13. O QUE ESTÁ INCLUÍDO --- */
+        .included-box { background: rgba(23, 0, 42, 0.6); border: 1px solid rgba(192, 146, 255, 0.1); padding: 4rem; }
+        .checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .check-item { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1rem; }
+        .check-item i { color: var(--accent); }
 
-        /* CTA & FOOTER */
-        .cta-section {
-            background: radial-gradient(circle at center, rgba(127,42,255,0.25) 0%, rgba(5,5,5,1) 80%);
-            border: 1px solid var(--border-color); border-radius: 40px; text-align: center; padding: 8rem 2rem;
-            position: relative; overflow: hidden;
+        /* --- 14. CALCULADORA --- */
+        .calc-wrapper { background: var(--surface); padding: 4rem; border: 1px solid rgba(192, 146, 255, 0.1); border-radius: 12px; }
+        .calc-row { margin-bottom: 3rem; }
+        .calc-title { font-family: 'Syne', sans-serif; font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--accent); }
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        .option-label { cursor: pointer; position: relative; }
+        .option-label input { position: absolute; opacity: 0; }
+        .option-box { 
+            padding: 1.5rem; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; height: 100%;
+            display: flex; flex-direction: column; background: #000;
         }
-        .cta-section h2 { font-size: 3.5rem; }
-        footer { border-top: 1px solid var(--border-color); padding: 5rem 0 3rem; text-align: center; background: #020203; }
-        .socials { display: flex; justify-content: center; gap: 1.5rem; margin: 3rem 0; flex-wrap: wrap; }
-        .social-btn {
-            width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,0.03);
-            display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem;
-            border: 1px solid var(--border-color); transition: var(--transition);
-        }
-        .social-btn:hover { background: var(--primary); border-color: var(--accent); transform: scale(1.1) rotate(10deg); box-shadow: 0 0 25px var(--primary); }
+        .option-label input:checked + .option-box { background: var(--primary); color: white; border-color: var(--primary); }
+        .option-name { font-weight: 700; display: block; margin-bottom: 5px; }
+        .option-price { font-size: 0.9rem; opacity: 0.8; }
+        .option-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 5px; display: block; }
+        .option-label input:checked + .option-box .option-desc { color: rgba(255,255,255,0.8); }
+        .total-display { margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: right; }
+        .final-price { font-size: 4rem; font-family: 'Syne', sans-serif; font-weight: 800; line-height: 1; margin-bottom: 1rem; color: var(--accent); }
+        .calc-included { margin: 2rem 0; padding: 2rem; border: 1px dashed rgba(192, 146, 255, 0.3); background: rgba(23, 0, 42, 0.5); }
+        .calc-included h4 { font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--accent); }
+        .calc-check-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .calc-check-list span { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: var(--text-muted); }
+        .calc-check-list i { color: var(--accent); }
 
-        /* RESPONSIVIDADE */
+        /* --- 15. EXTRAS --- */
+        .freela-box { display: flex; align-items: center; justify-content: space-between; padding: 4rem; background: #00B6C4; color: black; margin-bottom: 2rem; border-radius: 12px; text-align: left; }
+        .freela-text h3 { color: black; font-size: 2.5rem; margin-bottom: 1rem; }
+        .freela-text ul li { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; font-weight: 600; }
+        .btn-black { background: black; color: white; padding: 15px 30px; font-weight: 700; text-transform: uppercase; border: none; }
+        
+        .testimonial-item { width: 400px; flex-shrink: 0; background: rgba(23, 0, 42, 0.6); padding: 2.5rem; border: 1px solid rgba(192, 146, 255, 0.1); }
+        .quote-icon { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+        .stars { color: #FFC107; margin-bottom: 1rem; letter-spacing: 2px; }
+
+        .cta-big { text-align: center; padding: 8rem 0; }
+        .cta-big h2 { font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2rem; }
+        
+        /* FOOTER */
+        footer { border-top: 1px solid rgba(255,255,255,0.1); padding: 4rem 0; display: flex; justify-content: space-between; align-items: center; text-align: center; background: #000; }
+        .socials { display: flex; justify-content: center; gap: 1.5rem; }
+        .socials a { font-size: 1.5rem; color: var(--text-muted); }
+        .socials a:hover { color: var(--accent); }
+
+        /* --- WHATSAPP PREMIUM --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; color: var(--accent);
+            background: rgba(108, 19, 226, 0.2); /* Roxo transparente */
+            backdrop-filter: blur(10px); /* Efeito de vidro */
+            border: 1px solid rgba(192, 146, 255, 0.3); /* Borda fina */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Sombra profunda */
+            z-index: 1000; transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            background-color: var(--primary); /* Roxo sólido no hover */
+            color: white;
+            transform: scale(1.1) translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 0 25px var(--primary); /* Brilho neon */
+        }
+        
+        /* =========================================
+           RESPONSIVIDADE (MOBILE AJUSTADO)
+        ========================================= */
         @media (max-width: 900px) {
-            .section-padding { padding: 5rem 0; }
-            .hero h1 { font-size: 3rem; }
-            .about-grid { grid-template-columns: 1fr; text-align: center; } 
-            .about-list { text-align: left; }
+            .container { padding-left: 32px; padding-right: 32px; } 
+
+            .hero { padding-top: 150px; display: block; text-align: center; }
+            .hero-content { text-align: center; margin: 0 auto; }
+            .hero-btns { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            
+            .about-wrapper { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+            .about-image::after { display: none; }
+            .about-text h2 { font-size: 2.5rem; }
+            .about-check { justify-items: center; }
+            
+            .freela-box { flex-direction: column; text-align: center; gap: 2rem; padding: 3rem 1.5rem; }
+            .freela-text h3 { font-size: 2rem; }
+            .freela-text ul { display: inline-block; text-align: left; }
+            
+            footer { flex-direction: column; gap: 2rem; }
+            .socials { justify-content: center; width: 100%; }
+            
+            .nav-links, .header-cta { display: none; }
+            .mobile-btn { display: block; }
+            
+            .section-padding { padding: 4rem 0; }
+            .nav-btn { display: none; } 
+            
+            .portfolio-item, .testimonial-item { width: 85vw; } 
+            .carousel-track { padding: 0 10px; }
+            
             .bento-grid { grid-template-columns: 1fr; }
-            .bento-wide, .bento-full { grid-column: span 1; }
+            .bento-wide { grid-column: span 1; }
+            
             .videos-grid { grid-template-columns: 1fr; }
-            .video-info { text-align: center; }
+            .video-caption { flex-direction: column; gap: 10px; align-items: flex-start; }
+            
+            .calc-wrapper { padding: 2rem 1.5rem; }
+            .total-display { text-align: center; }
+            .final-price { font-size: 2.5rem; }
+            
+            .included-box { padding: 2rem 1.5rem; }
+
+            /* Ajuste do botão no mobile para não ficar gigante */
+            .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; font-size: 26px; }
         }
 
-        @media (max-width: 768px) {
-            .nav-links, .header-cta { display: none; } 
-            .mobile-btn { display: block; }
-            .hero { padding-top: 140px; padding-bottom: 60px; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.1rem; }
-            .tools-bar { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 1.5rem; border-radius: 24px; padding: 1.5rem; }
-            .tool { font-size: 0.9rem; }
-            .section-header, .about-grid, .video-showcase { text-align: center; }
-            .about-list { justify-content: center; text-align: center; grid-template-columns: 1fr; }
-            .checklist { grid-template-columns: 1fr; text-align: center; justify-items: center; }
-            .included-box { padding: 3rem 1.5rem; }
-            .portfolio-card, .testimonial-card { flex: 0 0 85vw; } 
-            .nav-btn { display: none; }
-            .carousel-track { padding: 0 20px; }
-            .socials { gap: 1rem; }
-            .cta-section { padding: 5rem 1.5rem; border-radius: 30px; } .cta-section h2 { font-size: 2.5rem; }
+        /* MENU MOBILE */
+        .nav-links.active {
+            display: flex;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: #000000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            z-index: 100;
+            padding: 2rem;
         }
+        .nav-links.active a { font-size: 2rem; font-family: 'Syne', sans-serif; font-weight: 700; color: white; }
+        
     </style>
 </head>
 <body>
 
-    <div class="ambient-light"></div>
-    <div class="beam"></div>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFN8PCJK"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <div class="cursor"></div>
+    <div class="noise-overlay"></div>
+    <div class="ambient-glow"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
     <header>
         <div class="container">
             <nav>
-                <div class="logo">VOXO <span>Estúdio</span></div>
+                <div class="logo">VOXO<span style="color:var(--accent)">.</span></div>
                 <ul class="nav-links">
-                    <li><a href="#servicos">Serviços</a></li>
-                    <li><a href="#portfolio">Portfólio</a></li>
-                    <li><a href="#processo">Processo</a></li>
-                    <li><a href="#depoimentos">Depoimentos</a></li>
+                    <li><a href="#servicos" class="hover-trigger">Serviços</a></li>
+                    <li><a href="#portfolio" class="hover-trigger">Portfólio</a></li>
+                    <li><a href="#depoimentos" class="hover-trigger">Depoimentos</a></li>
+                    <li><a href="#processo" class="hover-trigger">Processo</a></li>
+                    <li><a href="#contato" class="hover-trigger">Contato</a></li>
                 </ul>
                 <div class="header-cta">
-                    <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Solicitar Orçamento</a>
+                    <a href="#calculadora" class="btn btn-primary hover-trigger">Orçamento</a>
                 </div>
-                <i class="ph ph-list mobile-btn"></i>
+                <i class="ph ph-list mobile-btn hover-trigger" id="mobileMenuBtn"></i>
             </nav>
         </div>
     </header>
 
-    <section class="hero reveal">
+    <section class="hero">
         <div class="container">
-            <div class="hero-tag">✨ Feito para profissionais que empreendem com propósito!</div>
-            <h1>Sites profissionais<br>que geram resultados.</h1>
-            <p>Criação estratégica, moderna e totalmente personalizada para empresas, profissionais e agências.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap;">
-                <a href="#processo" class="btn btn-primary">Iniciar processo</a>
-                <a href="#portfolio" class="btn btn-outline">Ver portfólio</a>
-            </div>
-            <div class="badges">
-                <div class="badge"><i class="ph ph-seal-check"></i> +3 anos de experiência</div>
-                <div class="badge"><i class="ph ph-trend-up"></i> Especialista em conversão</div>
-                <div class="badge"><i class="ph ph-star-fill"></i> Avaliação 5 estrelas</div>
+            <div class="hero-content">
+                <span class="hero-tag">Feito para profissionais que empreendem com propósito!</span>
+                <h1>SITES PROFISSIONAIS<br>QUE GERAM <span style="color: var(--accent); font-style: italic;">RESULTADOS</span>.</h1>
+                <p>Criação estratégica, moderna e totalmente personalizada para empresas, profissionais e agências.</p>
+                
+                <div class="hero-btns">
+                    <a href="#calculadora" class="btn hover-trigger">Quero minha landing page</a>
+                    <a href="#portfolio" class="btn btn-primary hover-trigger">Ver portfólio</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div><span class="stat-number">+3</span><span class="stat-label">Anos de XP</span></div>
+                    <div><span class="stat-number">5.0</span><span class="stat-label">Especialista</span></div>
+                    <div><span class="stat-number">100%</span><span class="stat-label">Avaliação</span></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding">
-        <div class="container about-grid">
-            <div class="about-img-wrapper reveal">
-                <div class="about-glow"></div>
-                <img src="github.png" alt="Elizabeth" class="about-img" loading="lazy">
+    <div class="marquee-wrapper">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span>WORDPRESS • ELEMENTOR • GITHUB • FIGMA • HTML • CSS • JAVASCRIPT • </span>
+                <span>WORDPRESS • ELEMENTOR • GITHUB • FIGMA • HTML • CSS • JAVASCRIPT • </span>
             </div>
-            <div class="reveal">
+        </div>
+    </div>
+
+    <section class="section-padding">
+        <div class="container about-wrapper">
+            <div class="about-image">
+                <img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-09-at-23.15.34.jpeg" alt="Elizabeth VOXO" class="hover-trigger" loading="lazy">
+            </div>
+            <div class="about-text">
                 <h2>Prazer, eu sou a Elizabeth.</h2>
-                <h3 style="color: var(--accent); margin-bottom: 1.5rem; font-weight: 500;">Transformo ideias em páginas profissionais que convertem.</h3>
-                <p style="color: var(--text-muted); font-size: 1.1rem;">Sou Web Designer e desenvolvedora de Landing Pages e One Pages em WordPress, GitHUB e Figma. Nos últimos anos, ajudei empresas, infoprodutores e profissionais liberais a aumentarem contatos, leads e oportunidades através de páginas estratégicas, rápidas e visualmente impecáveis.</p>
-                <div class="about-list">
-                    <div class="about-item"><i class="ph ph-check-circle"></i> 3+ anos de experiência</div>
-                    <div class="about-item"><i class="ph ph-check-circle"></i> Dezenas de projetos entregues</div>
-                    <div class="about-item"><i class="ph ph-check-circle"></i> Processo rápido e organizado</div>
-                    <div class="about-item"><i class="ph ph-check-circle"></i> Suporte humanizado</div>
+                <p>Transformo ideias em páginas profissionais que convertem.</p>
+                <p>Sou Web Designer e desenvolvedora de Landing Pages e One Pages em WordPress, GitHUB e Figma. Nos últimos anos, ajudei empresas, infoprodutores e profissionais liberais a aumentarem contatos, leads e oportunidades através de páginas estratégicas, rápidas e visualmente impecáveis.</p>
+                <p style="color:white; font-weight:700;">Meu foco é simples: design bonito que gera resultados reais.</p>
+                
+                <div class="about-check">
+                    <div class="check-item"><i class="ph ph-check-circle"></i> 3+ anos de experiência</div>
+                    <div class="check-item"><i class="ph ph-check-circle"></i> Dezenas de projetos</div>
+                    <div class="check-item"><i class="ph ph-check-circle"></i> Processo rápido</div>
+                    <div class="check-item"><i class="ph ph-check-circle"></i> Suporte humanizado</div>
                 </div>
+
+                <a href="https://wa.me/559992232474" target="_blank" class="btn hover-trigger">Vamos conversar?</a>
             </div>
         </div>
     </section>
 
     <section id="servicos" class="section-padding">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>Serviços oferecidos</h2>
-                <p>Soluções completas para sua presença digital</p>
-            </div>
+            <h2 class="section-title">O que eu faço</h2>
             <div class="services-grid">
-                <div class="glass-card reveal">
+                <div class="service-card hover-trigger">
                     <div class="service-icon"><i class="ph ph-rocket-launch"></i></div>
                     <h3>Criação de Landing Page</h3>
                     <p>Páginas completas, estratégicas e preparadas para conversão.</p>
                 </div>
-                <div class="glass-card reveal">
+                <div class="service-card hover-trigger">
                     <div class="service-icon"><i class="ph ph-desktop"></i></div>
                     <h3>Criação de One Page</h3>
                     <p>Sites institucionais modernos, leves e altamente profissionais.</p>
                 </div>
-                <div class="glass-card reveal">
+                <div class="service-card hover-trigger">
                     <div class="service-icon"><i class="ph ph-wrench"></i></div>
                     <h3>Manutenção WordPress</h3>
                     <p>Ajustes, atualizações, melhorias e otimização.</p>
                 </div>
-                <div class="glass-card reveal">
+                <div class="service-card hover-trigger">
                     <div class="service-icon"><i class="ph ph-paint-brush"></i></div>
                     <h3>Layouts no Figma</h3>
                     <p>Design profissional e pronto para desenvolvimento.</p>
                 </div>
-                <div class="glass-card reveal">
+                <div class="service-card hover-trigger">
                     <div class="service-icon"><i class="ph ph-device-mobile"></i></div>
                     <h3>Desenvolvimento Responsivo</h3>
                     <p>Sites rápidos e adaptados para qualquer dispositivo.</p>
                 </div>
-                <div class="glass-card reveal">
+                <div class="service-card hover-trigger">
+                    <div class="service-icon"><i class="ph ph-magnifying-glass"></i></div>
+                    <h3>SEO Inicial</h3>
+                    <p>Configurações essenciais para aumentar sua visibilidade.</p>
+                </div>
+                <div class="service-card hover-trigger">
                     <div class="service-icon"><i class="ph ph-plugs-connected"></i></div>
-                    <h3>SEO e Integrações</h3>
-                    <p>Visibilidade no Google e conexão com WhatsApp, CRM e e-mail.</p>
+                    <h3>Integrações</h3>
+                    <p>WhatsApp, formulários, Google Ads, redes sociais, CRM, e-mail.</p>
                 </div>
             </div>
-            <div class="tools-bar reveal">
-                <span style="font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; color:var(--accent); font-weight:700;">Tecnologias:</span>
-                <div class="tool"><i class="ph ph-wordpress-logo"></i> WordPress</div>
-                <div class="tool"><i class="ph ph-layout"></i> Elementor</div>
-                <div class="tool"><i class="ph ph-github-logo"></i> Github</div>
-                <div class="tool"><i class="ph ph-figma-logo"></i> Figma</div>
-                <div class="tool"><i class="ph ph-code"></i> HTML/CSS/JS</div>
+            
+            <div class="tools-bar">
+                <i class="ph ph-wordpress-logo tool-icon"></i>
+                <i class="ph ph-layout tool-icon"></i>
+                <i class="ph ph-github-logo tool-icon"></i>
+                <i class="ph ph-figma-logo tool-icon"></i>
+                <i class="ph ph-code tool-icon"></i>
             </div>
         </div>
     </section>
 
     <section class="section-padding">
         <div class="container">
-            <div class="section-header reveal"><h2>Por que escolher a VOXO Estúdio?</h2></div>
+            <h2 class="section-title">Por que escolher a VOXO Estúdio?</h2>
             <div class="bento-grid">
-                <div class="glass-card bento-item bento-wide reveal">
+                <div class="bento-item bento-wide hover-trigger">
                     <div class="bento-icon"><i class="ph ph-pencil-circle"></i></div>
                     <h3>Design exclusivo</h3>
                     <p>Nada de modelos prontos — cada projeto é único para transmitir a identidade da sua marca.</p>
                 </div>
-                <div class="glass-card bento-item reveal">
+                <div class="bento-item hover-trigger">
                     <div class="bento-icon"><i class="ph ph-lightning"></i></div>
                     <h3>Processo rápido</h3>
-                    <p>Transparência em cada etapa.</p>
+                    <p>Você acompanha cada etapa com transparência e facilidade.</p>
                 </div>
-                <div class="glass-card bento-item reveal">
+                <div class="bento-item hover-trigger">
                     <div class="bento-icon"><i class="ph ph-device-mobile-camera"></i></div>
                     <h3>Responsividade total</h3>
-                    <p>Perfeito no celular e PC.</p>
+                    <p>Páginas perfeitas no celular, tablet e computador.</p>
                 </div>
-                <div class="glass-card bento-item bento-wide reveal">
+                <div class="bento-item bento-wide hover-trigger">
                     <div class="bento-icon"><i class="ph ph-headset"></i></div>
-                    <h3>Suporte + revisões + garantia</h3>
-                    <p>Ajustes inclusos e 7 dias de manutenção para garantir estabilidade total.</p>
+                    <h3>Suporte + revisões</h3>
+                    <p>Ajustes inclusos para garantir que tudo fique exatamente como você sonhou. Garantia de 7 dias.</p>
                 </div>
-                <div class="glass-card bento-item bento-full reveal">
+                <div class="bento-item hover-trigger">
                     <div class="bento-icon"><i class="ph ph-chat-circle-text"></i></div>
-                    <h3>Comunicação direta e sem burocracia</h3>
-                    <p>Fale diretamente com quem cria o seu projeto, garantindo agilidade e entendimento total das suas necessidades.</p>
+                    <h3>Comunicação direta</h3>
+                    <p>Atendimento humanizado, profissional e sem burocracia.</p>
                 </div>
             </div>
         </div>
@@ -468,10 +562,8 @@
 
     <section class="section-padding">
         <div class="container">
-            <div class="included-box reveal">
-                <div class="section-header" style="text-align: center; margin-bottom: 2rem;">
-                    <h2>Tudo que sua página precisa para performar</h2>
-                </div>
+            <div class="included-box">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Tudo que sua página precisa</h2>
                 <div class="checklist">
                     <div class="check-item"><i class="ph ph-check-square"></i> Design exclusivo</div>
                     <div class="check-item"><i class="ph ph-check-square"></i> Página completa desenvolvida</div>
@@ -479,12 +571,12 @@
                     <div class="check-item"><i class="ph ph-check-square"></i> Responsividade total</div>
                     <div class="check-item"><i class="ph ph-check-square"></i> Botão de WhatsApp integrado</div>
                     <div class="check-item"><i class="ph ph-check-square"></i> Formulário de captura</div>
-                    <div class="check-item"><i class="ph ph-check-square"></i> Todas as integrações necessárias</div>
+                    <div class="check-item"><i class="ph ph-check-square"></i> Todas as integrações</div>
                     <div class="check-item"><i class="ph ph-check-square"></i> Entrega otimizada e leve</div>
-                    <div class="check-item"><i class="ph ph-check-square"></i> Suporte + revisões + manutenção</div>
+                    <div class="check-item"><i class="ph ph-check-square"></i> Suporte + revisões</div>
                 </div>
-                <div style="text-align: center; margin-top: 3rem;">
-                    <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Quero meu orçamento agora</a>
+                <div style="margin-top: 3rem;">
+                    <a href="#calculadora" class="btn btn-primary hover-trigger">Quero meu orçamento agora</a>
                 </div>
             </div>
         </div>
@@ -492,135 +584,251 @@
 
     <section id="portfolio" class="section-padding">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>Resultados que falam por si</h2>
-                <p>Navegue pelos projetos recentes</p>
-            </div>
-            
-            <div class="carousel-wrapper reveal">
+            <h2 class="section-title">Resultados que falam por si</h2>
+            <div class="carousel-wrapper">
                 <button class="nav-btn prev-p" id="prev-portfolio"><i class="ph ph-caret-left"></i></button>
                 <div class="carousel-track-container">
-                    <div class="carousel-track" id="track-portfolio">
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-sandramendesprev.com_.br_-e1765384296454.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Previdenciária</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Página de Vendas</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-swater.us_-e1765561026146.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Limpeza Veicular</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-4-e1765384284664.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Portfólio Pessoal</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-3.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Design Moderno</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-2-e1765384262573.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>One Page Tech</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io_-e1765559141857.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Landing Estratégica</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-1-e1765384241650.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Dark Mode UI</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-audexa.com_.br_-e1765384381310.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Audexa Consultoria</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissvieira.com_.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Dra. Thaiss Vieira</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voirdestinos.com_.br_-e1765561007273.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Voir Destinos</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-thanavida.com_.br_.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Thana Vida</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-pandaamarelo.com_.br_-e1765561049226.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Panda Amarelo</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissilvavieira.com_.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Clínica Médica</h3></div></div>
-                        <div class="portfolio-card"><div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-josueejuizes.com_.br_-e1765561075692.png" alt="Projeto" loading="lazy"></div><div class="portfolio-info"><h3>Josué e Juízes</h3></div></div>
+                    <div class="carousel-track">
+                        
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-audexa.com_.br-1.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>LIVRAS</h3>
+                                <a href="https://audexa.com.br/livras/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>AMALFI BANK</h3>
+                                <a href="https://skyblue-salmon-760264.hostingersite.com/amalfi-bank-teste-3/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io_-e1765559141857.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>MENTORIA</h3>
+                                <a href="https://voxoestudio.github.io/mentoria/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-isaelsouza.site_-e1765655032801.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Há vida após o divórcio?</h3>
+                                <a href="https://isaelsouza.site/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-josueejuizes.com_.br_-e1765561075692.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Josué e Juízes</h3>
+                                <a href="https://josueejuizes.com.br" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissilvavieira.com_.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Clínica Médica</h3>
+                                <a href="https://drathaissilvavieira.com" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-pandaamarelo.com_.br_-e1765561049226.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Panda Amarelo</h3>
+                                <a href="https://pandaamarelo.com.br" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-thanavida.com_.br_.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Thana Vida</h3>
+                                <a href="https://thanavida.com.br" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-swater.us_-e1765561026146.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Swater Cleaning</h3>
+                                <a href="https://swater.us" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voirdestinos.com_.br_-e1765561007273.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Voir Destinos</h3>
+                                <a href="https://voirdestinos.com.br" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-drathaissvieira.com_.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Dra. Thaiss Vieira</h3>
+                                <a href="https://drathaissvieira.com" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-audexa.com_.br_-e1765384381310.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Bizu de Elite</h3>
+                                <a href="https://audexa.com.br/bizu-de-elite" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-1-e1765384241650.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Estética & Beleza</h3>
+                                <a href="https://voxoestudio.github.io/Est-tica-Beleza-Dra.-Isabella-/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-2-e1765384262573.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Odontologia</h3>
+                                <a href="https://voxoestudio.github.io/Odontologia-Dr.-Gustavo-/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-3.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Nutricionista</h3>
+                                <a href="https://voxoestudio.github.io/Nutricionista-Camila-Soares-/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-voxoestudio.github.io-4-e1765384284664.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Terapia Online</h3>
+                                <a href="https://voxoestudio.github.io/Psicologia-Terapia-Online/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item hover-trigger">
+                            <div class="portfolio-media"><img src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-sandramendesprev.com_.br_-e1765384296454.png" loading="lazy"></div>
+                            <div class="portfolio-info">
+                                <h3>Sandra Mendes Adv.</h3>
+                                <a href="https://sandramendesprev.com.br/" target="_blank" class="visit-link">Visitar Site ↗</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <button class="nav-btn next-p" id="next-portfolio"><i class="ph ph-caret-right"></i></button>
             </div>
+        </div>
+    </section>
 
-            <div class="video-showcase reveal">
-                <h3 style="font-size: 2rem; margin-bottom: 0.5rem;">Projetos Premium em Destaque</h3>
-                <p style="color: var(--text-muted); font-size: 1.1rem;">Veja a fluidez e o design em movimento.</p>
-                <div class="videos-grid">
-                    <div class="video-card">
-                        <div class="video-container">
-                            <video autoplay muted loop playsinline controls poster="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png" loading="lazy">
-                                <source src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com-f_vfzi1-nh9ckt.webm" type="video/webm">
-                            </video>
-                        </div>
-                        <div class="video-info">
-                            <span class="video-badge">PÁGINA DE VENDAS</span>
-                            <h4 style="color: white; font-size: 1.3rem;">VSL Alta Conversão</h4>
-                        </div>
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Design em Movimento</h2>
+            <div class="videos-grid">
+                
+                <div class="video-wrapper hover-trigger">
+                    <div class="video-container">
+                        <video autoplay muted loop playsinline controls poster="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com_-e1765384307644.png" loading="lazy">
+                            <source src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-skyblue-salmon-760264.hostingersite.com-f_vfzi1-nh9ckt.webm" type="video/webm">
+                        </video>
                     </div>
-                    <div class="video-card">
-                        <div class="video-container">
-                            <video autoplay muted loop playsinline controls loading="lazy">
-                                <source src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-naluabraids.com_.br-cyirnho5yq5s4l.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="video-info">
-                            <span class="video-badge">INSTITUCIONAL</span>
-                            <h4 style="color: white; font-size: 1.3rem;">Nalua Braids</h4>
-                        </div>
+                    <div class="video-caption">
+                        <span class="video-title">AMALFI BANK</span>
+                        <a href="https://skyblue-salmon-760264.hostingersite.com/amalfi-bank-teste-3/" target="_blank" class="visit-link">Visitar Site ↗</a>
                     </div>
                 </div>
-            </div>
 
-            <div style="text-align: center; margin-top: 4rem;" class="reveal">
-                <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="btn btn-outline" rel="noopener noreferrer">Ver portfólio completo no Behance</a>
+                <div class="video-wrapper hover-trigger">
+                    <div class="video-container">
+                        <video autoplay muted loop playsinline controls loading="lazy">
+                            <source src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-naluabraids.com_.br-cyirnho5yq5s4l.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-caption">
+                        <span class="video-title">Nalua Braids</span>
+                        <a href="https://naluabraids.com.br" target="_blank" class="visit-link">Visitar Site ↗</a>
+                    </div>
+                </div>
+
+                <div class="video-wrapper hover-trigger">
+                    <div class="video-container">
+                        <video autoplay muted loop playsinline controls loading="lazy">
+                            <source src="https://voxoestudio.com.br/wp-content/uploads/2025/12/Macbook-Air-academiapb.com_.br-a1gs0gkst8mqn4.webm" type="video/webm">
+                        </video>
+                    </div>
+                    <div class="video-caption">
+                        <span class="video-title">Academia PB</span>
+                        <a href="https://academiabereanos.com.br" target="_blank" class="visit-link">Visitar Site ↗</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
     <section id="processo" class="section-padding">
         <div class="container">
-            <div class="section-header reveal"><h2>Como funciona trabalhar com a VOXO</h2></div>
-            <div class="process-grid reveal">
-                <div class="process-card">
-                    <div class="step-number">01</div>
-                    <div class="process-icon"><i class="ph ph-chats-circle"></i></div>
-                    <h3>Alinhamento Estratégico</h3>
-                    <p>Entendo a fundo o seu negócio e objetivos para criar algo alinhado ao que você precisa.</p>
+            <h2 class="section-title">Como funciona trabalhar com a VOXO</h2>
+            <div class="services-grid">
+                <div class="card-premium hover-trigger">
+                    <h3 style="color:var(--primary)">01. Briefing + Contrato</h3>
+                    <p>Entendo seu negócio e objetivos para criar algo alinhado ao que você precisa.</p>
                 </div>
-                <div class="process-card">
-                    <div class="step-number">02</div>
-                    <div class="process-icon"><i class="ph ph-paint-brush-broad"></i></div>
-                    <h3>UI & UX Design</h3>
-                    <p>Criação do layout exclusivo com foco total em estética, experiência e conversão.</p>
+                <div class="card-premium hover-trigger">
+                    <h3 style="color:var(--primary)">02. Design + Protótipo</h3>
+                    <p>Criação do layout com foco em estética e conversão.</p>
                 </div>
-                <div class="process-card">
-                    <div class="step-number">03</div>
-                    <div class="process-icon"><i class="ph ph-code"></i></div>
-                    <h3>Desenvolvimento Clean</h3>
+                <div class="card-premium hover-trigger">
+                    <h3 style="color:var(--primary)">03. Desenvolvimento</h3>
                     <p>Transformo o layout em uma página rápida, leve e profissional.</p>
                 </div>
-                <div class="process-card">
-                    <div class="step-number">04</div>
-                    <div class="process-icon"><i class="ph ph-rocket-launch"></i></div>
-                    <h3>Otimização & Lançamento</h3>
-                    <p>Páginas testadas, ajustadas e entregues prontas para rodar anúncios.</p>
+                <div class="card-premium hover-trigger">
+                    <h3 style="color:var(--primary)">04. Testes + Entrega</h3>
+                    <p>Páginas testadas, ajustadas e entregues prontas para conversão.</p>
                 </div>
-                <div class="process-card">
-                    <div class="step-number">05</div>
-                    <div class="process-icon"><i class="ph ph-shield-check"></i></div>
-                    <h3>Suporte & Garantia</h3>
-                    <p>7 dias de suporte pós-entrega para garantir estabilidade total.</p>
+                <div class="card-premium hover-trigger">
+                    <h3 style="color:var(--primary)">05. Manutenção</h3>
+                    <p>7 dias de suporte após a entrega.</p>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 5rem;" class="reveal"><a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary">Iniciar agora <i class="ph ph-arrow-right"></i></a></div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#calculadora" class="btn btn-primary hover-trigger">Iniciar Agora</a>
+            </div>
         </div>
     </section>
 
     <section id="depoimentos" class="section-padding">
         <div class="container">
-            <div class="section-header reveal">
-                <h2>O que dizem meus clientes</h2>
-                <p>Experiências reais de quem confiou no meu trabalho</p>
-            </div>
-            <div class="carousel-wrapper reveal">
+            <h2 class="section-title">Resultados que falam por si</h2>
+            <div class="carousel-wrapper">
                 <button class="nav-btn prev-p" id="prev-testim"><i class="ph ph-caret-left"></i></button>
                 <div class="carousel-track-container">
                     <div class="carousel-track" id="track-testim">
-                        <div class="testimonial-card">
-                            <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"O trabalho ficou excelente. A profissional foi rápida e caprichosa. Entendeu toda a solicitação feita. Recomendo."</p></div>
-                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Sandra Mendes</strong><span style="font-size: 0.9rem; color: var(--accent);">LP Previdenciária</span><div class="date">Dez 2025</div></div>
+                        
+                        <div class="testimonial-item hover-trigger">
+                            <i class="ph ph-quotes quote-icon"></i>
+                            <p style="margin-bottom:1rem">"O trabalho ficou excelente. A profissional foi rápida e caprichosa. Entendeu toda a solicitação feita. Recomendo."</p>
+                            <div class="stars">★★★★★</div>
+                            <strong>Sandra Mendes</strong>
                         </div>
-                        <div class="testimonial-card">
-                            <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"O trabalho na criação da página de vendas ficou excelente! Profissional, organizado e com um visual muito atrativo. Superou minhas expectativas."</p></div>
-                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Felipe</strong><span style="font-size: 0.9rem; color: var(--accent);">Página de Vendas</span><div class="date">Nov 2025</div></div>
+
+                        <div class="testimonial-item hover-trigger">
+                            <i class="ph ph-quotes quote-icon"></i>
+                            <p style="margin-bottom:1rem">"O trabalho na criação da página de vendas ficou excelente! Profissional, organizado e com um visual muito atrativo. Superou minhas expectativas."</p>
+                            <div class="stars">★★★★★</div>
+                            <strong>Felipe</strong>
                         </div>
-                        <div class="testimonial-card">
-                            <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text" style="opacity: 0.7;">(Avaliação 5 estrelas sem comentário por escrito.)</p></div>
-                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Jucemar G</strong><span style="font-size: 0.9rem; color: var(--accent);">Site Institucional</span><div class="date">Out-Nov 2025</div></div>
+
+                        <div class="testimonial-item hover-trigger">
+                            <i class="ph ph-quotes quote-icon"></i>
+                            <p style="margin-bottom:1rem">"Avaliação 5 estrelas sem comentário por escrito."</p>
+                            <div class="stars">★★★★★</div>
+                            <strong>Jucemar G</strong>
                         </div>
-                        <div class="testimonial-card">
-                            <div><i class="ph ph-quotes quote-icon"></i><p class="testimonial-text">"Muito profissional, superou as expectativas. Caso precise voltarei a trabalhar novamente."</p></div>
-                            <div><div class="stars">★★★★★ <span style="font-size: 0.8rem; color: #777;">5.0</span></div><strong style="color: white; display: block; font-size: 1.1rem;">Isael</strong><span style="font-size: 0.9rem; color: var(--accent);">Limpeza Veicular</span><div class="date">Nov 2025</div></div>
+
+                        <div class="testimonial-item hover-trigger">
+                            <i class="ph ph-quotes quote-icon"></i>
+                            <p style="margin-bottom:1rem">"Muito profissional, superou as expectativas. Caso precise voltarei a trabalhar novamente."</p>
+                            <div class="stars">★★★★★</div>
+                            <strong>Isael</strong>
                         </div>
+
                     </div>
                 </div>
                 <button class="nav-btn next-p" id="next-testim"><i class="ph ph-caret-right"></i></button>
@@ -628,79 +836,309 @@
         </div>
     </section>
 
-    <section id="contato" class="container reveal" style="margin-bottom: 4rem;">
-        <div class="cta-section">
-            <h2>Pronta para transformar sua presença online?</h2>
-            <p style="color: #ddd; margin-bottom: 3rem; font-size: 1.2rem;">Crie uma landing page profissional, bonita e feita para converter.</p>
-            <a href="mailto:contato@voxoestudio.com.br" class="btn btn-primary" style="padding: 20px 48px; font-size: 1.2rem;">Solicitar orçamento</a>
+    <section id="calculadora" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Calculadora de Orçamento</h2>
+            <div class="calc-wrapper">
+                <form id="budgetForm" class="calc-form">
+                    
+                    <div class="calc-row">
+                        <div class="calc-title">1. Tipo de Projeto (Obrigatório)</div>
+                        <div class="options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="project_type" value="1200" data-label="One Page Institucional" checked>
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">One Page</span>
+                                    <span class="option-price">R$ 1.200</span>
+                                </div>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="project_type" value="1500" data-label="Landing Page de Conversão">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Landing Page</span>
+                                    <span class="option-price">R$ 1.500</span>
+                                    <span class="option-desc">Foco em conversão</span>
+                                </div>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="project_type" value="300" data-label="Manutenção Mensal">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Manut. Mensal</span>
+                                    <span class="option-price">R$ 300/mês</span>
+                                </div>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="project_type" value="450" data-label="Manutenção Pontual">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Manut. Pontual</span>
+                                    <span class="option-price">R$ 450</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="calc-row">
+                        <div class="calc-title">2. Tecnologia / Base</div>
+                        <div class="options-grid">
+                            <label class="option-label">
+                                <input type="radio" name="tech" value="0" data-label="WordPress + Elementor" checked>
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">WordPress</span>
+                                    <span class="option-price">Incluso</span>
+                                </div>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="tech" value="350" data-label="Figma Layout">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Figma</span>
+                                    <span class="option-price">+ R$ 350</span>
+                                    <span class="option-desc">Validação visual</span>
+                                </div>
+                            </label>
+                            <label class="option-label">
+                                <input type="radio" name="tech" value="600" data-label="Code Puro">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Code Puro</span>
+                                    <span class="option-price">+ R$ 600</span>
+                                    <span class="option-desc">Alta performance</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="calc-row">
+                        <div class="calc-title">3. Integrações Essenciais</div>
+                        <div class="options-grid">
+                            <label class="option-label">
+                                <input type="checkbox" name="integration_social" value="150" data-label="Whats + Insta">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Whats + Insta</span>
+                                    <span class="option-price">+ R$ 150</span>
+                                </div>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="integration_form" value="120" data-label="Formulário de Leads">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Formulário</span>
+                                    <span class="option-price">+ R$ 120</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="calc-included">
+                        <h4><i class="ph ph-gift"></i> Recursos já inclusos no valor base:</h4>
+                        <div class="calc-check-list">
+                            <span><i class="ph ph-check-circle"></i> Design exclusivo</span>
+                            <span><i class="ph ph-check-circle"></i> 100% Responsivo</span>
+                            <span><i class="ph ph-check-circle"></i> Botão WhatsApp</span>
+                            <span><i class="ph ph-check-circle"></i> SEO Básico</span>
+                            <span><i class="ph ph-check-circle"></i> Performance</span>
+                            <span><i class="ph ph-check-circle"></i> Foco em Conversão</span>
+                        </div>
+                    </div>
+
+                    <div class="calc-row">
+                        <div class="calc-title">4. Extras & Prazos</div>
+                        <div class="options-grid">
+                            <label class="option-label">
+                                <input type="checkbox" name="hosting" value="180" data-label="Hospedagem + Domínio">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Hospedagem</span>
+                                    <span class="option-price">+ R$ 180/ano</span>
+                                </div>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="maintenance_monthly" value="300" data-label="Manutenção Mensal Contínua">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Manut. Contínua</span>
+                                    <span class="option-price">+ R$ 300/mês</span>
+                                </div>
+                            </label>
+                            <label class="option-label">
+                                <input type="checkbox" name="urgency" value="400" data-label="Prazo Urgente">
+                                <div class="option-box hover-trigger">
+                                    <span class="option-name">Urgência</span>
+                                    <span class="option-price">+ R$ 400</span>
+                                    <span class="option-desc">Prioridade máxima</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="total-display">
+                    <p style="color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Investimento Estimado</p>
+                    <div class="final-price" id="totalPrice">R$ 1.200,00</div>
+                    <button onclick="sendBudgetToWhatsApp()" class="btn btn-primary hover-trigger" style="margin-top: 1rem;">Quero confirmar meu orçamento</button>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Prefere conversar antes? <a href="https://wa.me/5599992232474" style="color: var(--accent); text-decoration: underline;">Me chama no WhatsApp</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="margin-bottom: 4rem;">
+        <div class="freela-box">
+            <div class="freela-text">
+                <h3>Prefere contratar pelo 99Freelas?</h3>
+                <p style="margin-bottom: 1.5rem; color: #333;">Se você se sente mais seguro contratando via plataforma, eu também atendo por lá.</p>
+                <ul>
+                    <li><i class="ph ph-shield-check"></i> Pagamento protegido</li>
+                    <li><i class="ph ph-star"></i> Avaliação 5 Estrelas</li>
+                </ul>
+            </div>
+            <a href="https://www.99freelas.com.br/user/LizGomes" target="_blank" class="btn-black hover-trigger">Contratar via 99Freelas</a>
+        </div>
+    </section>
+
+    <section id="instagram" class="section-padding" style="padding-top: 0;">
+        <div class="container">
+            <h2 class="section-title">Bastidores no Instagram</h2>
+            <div style="margin-bottom: 3rem;">
+                <behold-widget feed-id="muJ1DVX434DEKvCIhS6H"></behold-widget>
+            </div>
+            <div style="text-align: center;">
+                <a href="https://www.instagram.com/voxoestudio?igsh=MWY0c21iNXBxMmpwbw==" target="_blank" class="btn hover-trigger">Seguir no Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="cta-big">
+        <div class="container">
+            <h2>Pronta para transformar<br>sua presença online?</h2>
+            <p style="color: var(--text-muted); font-size: 1.2rem; margin-bottom: 2rem;">Crie uma landing page profissional, bonita e feita para converter.</p>
+            <a href="#calculadora" class="btn btn-primary hover-trigger">Solicitar orçamento</a>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="logo">VOXO <span>Estúdio</span></div>
-            <p style="color: var(--text-muted); margin-top: 10px; font-size: 1.1rem;">Feito para profissionais que empreendem com propósito!</p>
-            <div class="socials">
-                <a href="https://www.instagram.com/voxoestudio/" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-instagram-logo"></i></a>
-                <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-behance-logo"></i></a>
-                <a href="https://www.99freelas.com.br/user/LizGomes" target="_blank" class="social-btn" rel="noopener noreferrer"><i class="ph ph-briefcase"></i></a>
-                <a href="mailto:contato@voxoestudio.com.br" class="social-btn"><i class="ph ph-envelope"></i></a>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="logo">VOXO <span>Estúdio</span></div>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">Web Design Estratégico e Feminino</p>
             </div>
-            <ul style="display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-bottom: 3rem; color: var(--text-muted); font-size: 1rem; font-weight: 500;">
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#portfolio">Portfólio</a></li>
-                <li><a href="#depoimentos">Depoimentos</a></li>
-                <li><a href="#processo">Processo</a></li>
+            <ul style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <li><a href="#servicos" class="hover-trigger">Serviços</a></li>
+                <li><a href="#portfolio" class="hover-trigger">Portfólio</a></li>
+                <li><a href="#depoimentos" class="hover-trigger">Depoimentos</a></li>
+                <li><a href="#processo" class="hover-trigger">Processo</a></li>
             </ul>
-            <p style="font-size: 0.9rem; color: #666;">© 2025 VOXO Estúdio – Todos os direitos reservados</p>
+            <div class="socials">
+                <a href="https://www.instagram.com/voxoestudio/" target="_blank" class="hover-trigger"><i class="ph ph-instagram-logo"></i></a>
+                <a href="https://www.behance.net/elizabethsthefane" target="_blank" class="hover-trigger"><i class="ph ph-behance-logo"></i></a>
+                <a href="https://wa.me/5599992232474" target="_blank" class="hover-trigger"><i class="ph ph-whatsapp-logo"></i></a>
+            </div>
+            <p style="color: #444; margin-top: 2rem; font-size: 0.8rem; text-align: center;">© 2025 VOXO Estúdio – Todos os direitos reservados.</p>
+            <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.6; text-align: center;">
+                <a href="https://voxoestudio.com.br/privacy-policy/" target="_blank" style="color: inherit; text-decoration: underline;">Política de Privacidade</a>
+            </div>
         </div>
     </footer>
 
+    <a href="https://wa.me/5599992232474" target="_blank" class="whatsapp-float hover-trigger" aria-label="Falar no WhatsApp">
+        <i class="ph ph-whatsapp-logo"></i>
+    </a>
+
     <script>
-        // Menu Mobile Toggle
-        const btn = document.querySelector('.mobile-btn');
-        const nav = document.querySelector('.nav-links');
-        btn.addEventListener('click', () => {
-            nav.style.display = (nav.style.display === 'flex') ? 'none' : 'flex';
-            if(nav.style.display === 'flex') {
-                nav.style.position='absolute'; nav.style.top='70px'; nav.style.left='0'; nav.style.right='0';
-                nav.style.background='rgba(5,5,5,0.95)'; nav.style.backdropFilter='blur(10px)'; nav.style.flexDirection='column'; nav.style.padding='2rem'; nav.style.borderBottom='1px solid #333'; nav.style.zIndex='101';
+        // CURSOR
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        document.querySelectorAll('.hover-trigger').forEach(link => {
+            link.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            link.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // BEHOLD WIDGET
+        (() => { const d=document,s=d.createElement("script");s.type="module"; s.src="https://w.behold.so/widget.js";d.head.append(s); })();
+
+        // MENU MOBILE (FIXED LOGIC)
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Toggle Icon
+            if(navLinks.classList.contains('active')) {
+                mobileBtn.classList.replace('ph-list', 'ph-x');
+                document.body.style.overflow = 'hidden'; // Block Scroll
+            } else {
+                mobileBtn.classList.replace('ph-x', 'ph-list');
+                document.body.style.overflow = 'auto'; // Enable Scroll
             }
         });
 
-        // SCROLL REVEAL ANIMATION
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealOnScroll = () => {
-            for (let i = 0; i < revealElements.length; i++) {
-                const windowHeight = window.innerHeight;
-                const elementTop = revealElements[i].getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    revealElements[i].classList.add('active');
-                }
-            }
-        }
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); 
+        // Close menu when clicking a link
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileBtn.classList.replace('ph-x', 'ph-list');
+                document.body.style.overflow = 'auto';
+            });
+        });
 
-        // CARROSSEL FUNÇÃO
+        // CALCULATOR LOGIC
+        const formCalculator = document.getElementById('budgetForm');
+        const totalDisplay = document.getElementById('totalPrice');
+        
+        function calculateTotal() {
+            let total = 0;
+            const projectType = document.querySelector('input[name="project_type"]:checked');
+            if (projectType) total += parseFloat(projectType.value);
+            const tech = document.querySelector('input[name="tech"]:checked');
+            if (tech) total += parseFloat(tech.value);
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(el => {
+                total += parseFloat(el.value);
+            });
+            totalDisplay.innerText = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+        const inputs = formCalculator.querySelectorAll('input');
+        inputs.forEach(input => { input.addEventListener('change', calculateTotal); });
+
+        function sendBudgetToWhatsApp() {
+            let message = "*Olá Elizabeth! Simulação do Site:*%0A%0A";
+            const type = document.querySelector('input[name="project_type"]:checked');
+            const tech = document.querySelector('input[name="tech"]:checked');
+            
+            if(type) message += `📌 *Projeto:* ${type.getAttribute('data-label')}%0A`;
+            if(tech) message += `💻 *Tecnologia:* ${tech.getAttribute('data-label')}%0A`;
+            
+            message += `✅ *Extras:* `;
+            let extras = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(el => {
+                extras.push(el.getAttribute('data-label'));
+            });
+            message += extras.length > 0 ? extras.join(', ') : "Nenhum";
+            
+            message += `%0A%0A💰 *Total Estimado:* ${totalDisplay.innerText}`;
+            window.open(`https://wa.me/5599992232474?text=${message}`, '_blank');
+        }
+
+        // CAROUSEL FUNCTION (GENERIC)
         function initCarousel(trackId, prevBtnId, nextBtnId, scrollAmount) {
             const track = document.getElementById(trackId);
             const prevBtn = document.getElementById(prevBtnId);
             const nextBtn = document.getElementById(nextBtnId);
             if(!track || !prevBtn || !nextBtn) return;
 
-            prevBtn.addEventListener('click', () => { track.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
-            nextBtn.addEventListener('click', () => { track.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
+            prevBtn.addEventListener('click', () => { track.parentNode.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
+            nextBtn.addEventListener('click', () => { track.parentNode.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
 
             let isDown = false; let startX, scrollLeft;
-            track.addEventListener('mousedown', (e) => { isDown = true; track.style.cursor = 'grabbing'; track.style.scrollSnapType = 'none'; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
-            track.addEventListener('mouseleave', () => { isDown = false; track.style.cursor = 'grab'; track.style.scrollSnapType = 'x mandatory'; });
-            track.addEventListener('mouseup', () => { isDown = false; track.style.cursor = 'grab'; track.style.scrollSnapType = 'x mandatory'; });
-            track.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; const walk = (x - startX) * 2; track.scrollLeft = scrollLeft - walk; });
+            const container = track.parentNode;
+
+            container.addEventListener('mousedown', (e) => { isDown = true; container.style.cursor = 'grabbing'; startX = e.pageX - container.offsetLeft; scrollLeft = container.scrollLeft; });
+            container.addEventListener('mouseleave', () => { isDown = false; container.style.cursor = 'grab'; });
+            container.addEventListener('mouseup', () => { isDown = false; container.style.cursor = 'grab'; });
+            container.addEventListener('mousemove', (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - container.offsetLeft; const walk = (x - startX) * 2; container.scrollLeft = scrollLeft - walk; });
         }
+
         initCarousel('track-portfolio', 'prev-portfolio', 'next-portfolio', 420);
-        initCarousel('track-testim', 'prev-testim', 'next-testim', 450);
+        initCarousel('track-testim', 'prev-testim', 'next-testim', 420);
     </script>
 </body>
 </html>
